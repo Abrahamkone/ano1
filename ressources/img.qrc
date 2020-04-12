@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="consul_img">
+    <file>img1.png</file>
+    <file>img4.png</file>
+    <file>img6.png</file>
+    <file>img7.jpg</file>
+    <file>img8.jpg</file>
+    <file>img2.png</file>
+    <file>img3.png</file>
+    <file>img5.png</file>
+  </qresource>
+</RCC>
