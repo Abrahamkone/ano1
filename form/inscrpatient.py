@@ -22,22 +22,14 @@ class Ui_Incrpatient(object):
         font.setUnderline(True)
         font.setWeight(75)
         self.groupBox.setFont(font)
-        self.groupBox.setStyleSheet("QLineEdit{\n"
-"    color: rgb(239, 239, 239);\n"
-"    color: rgb(238, 238, 238);\n"
-"background-color: rgb(188, 188, 188);\n"
-"}")
+        self.groupBox.setStyleSheet("QLineEdit{\n""    color: rgb(239, 239, 239);\n""    color: rgb(238, 238, 238);\n""background-color: rgb(188, 188, 188);\n""}")
         self.groupBox.setObjectName("groupBox")
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout.setObjectName("gridLayout")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.sexe = QtWidgets.QComboBox(self.groupBox)
-        self.sexe.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+        self.sexe.setStyleSheet("border-color:black;\n""border-radius:10px;\n""border-style:solid;\n""border-width:1px;\n""")
         self.sexe.setObjectName("sexe")
         self.sexe.addItem("")
         self.sexe.setItemText(0, "")
@@ -81,16 +73,11 @@ class Ui_Incrpatient(object):
         self.horizontalLayout.addItem(spacerItem6)
         self.gridLayout.addLayout(self.horizontalLayout, 1, 5, 1, 1)
         self.photo = QtWidgets.QLabel(self.groupBox)
-        self.photo.setStyleSheet("\n"
-"background-color: rgb(203, 203, 203);")
+        self.photo.setStyleSheet("\n""background-color: rgb(203, 203, 203);")
         self.photo.setObjectName("photo")
         self.gridLayout.addWidget(self.photo, 0, 4, 1, 2)
         self.cont_5 = QtWidgets.QLineEdit(self.groupBox)
-        self.cont_5.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+        self.cont_5.setStyleSheet("border-color:black;\n""border-radius:10px;\n""border-style:solid;\n""border-width:1px;\n""")
         self.cont_5.setObjectName("cont_5")
         self.gridLayout.addWidget(self.cont_5, 3, 3, 1, 1)
         self.label_5 = QtWidgets.QLabel(self.groupBox)
@@ -106,47 +93,27 @@ class Ui_Incrpatient(object):
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 2, 0, 1, 1)
         self.prenomClient_5 = QtWidgets.QLineEdit(self.groupBox)
-        self.prenomClient_5.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+        self.prenomClient_5.setStyleSheet("border-color:black;\n""border-radius:10px;\n""border-style:solid;\n""border-width:1px;\n""")
         self.prenomClient_5.setObjectName("prenomClient_5")
         self.gridLayout.addWidget(self.prenomClient_5, 2, 3, 1, 1)
         self.lieu = QtWidgets.QLineEdit(self.groupBox)
-        self.lieu.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+        self.lieu.setStyleSheet("border-color:black;\n""border-radius:10px;\n""border-style:solid;\n""border-width:1px;\n""")
         self.lieu.setObjectName("lieu")
         self.gridLayout.addWidget(self.lieu, 6, 1, 1, 1)
         self.cni_Client = QtWidgets.QLineEdit(self.groupBox)
-        self.cni_Client.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+        self.cni_Client.setStyleSheet("border-color:black;\n""border-radius:10px;\n""border-style:solid;\n""border-width:1px;\n""")
         self.cni_Client.setObjectName("cni_Client")
         self.gridLayout.addWidget(self.cni_Client, 7, 1, 1, 1)
         self.nation = QtWidgets.QLineEdit(self.groupBox)
         self.nation.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
-        self.nation.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+        self.nation.setStyleSheet("border-color:black;\n""border-radius:10px;\n""border-style:solid;\n""border-width:1px;\n""")
         self.nation.setObjectName("nation")
         self.gridLayout.addWidget(self.nation, 6, 3, 1, 1)
         self.label_12 = QtWidgets.QLabel(self.groupBox)
         self.label_12.setObjectName("label_12")
         self.gridLayout.addWidget(self.label_12, 7, 2, 1, 1)
         self.mail = QtWidgets.QLineEdit(self.groupBox)
-        self.mail.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+        self.mail.setStyleSheet("border-color:black;\n""border-radius:10px;\n""border-style:solid;\n""border-width:1px;\n""")
         self.mail.setObjectName("mail")
         self.gridLayout.addWidget(self.mail, 7, 3, 1, 1)
         self.label_7 = QtWidgets.QLabel(self.groupBox)
@@ -156,11 +123,7 @@ class Ui_Incrpatient(object):
         self.label_51.setObjectName("label_51")
         self.gridLayout.addWidget(self.label_51, 3, 2, 1, 1)
         self.nomClient = QtWidgets.QLineEdit(self.groupBox)
-        self.nomClient.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+        self.nomClient.setStyleSheet("border-color:black;\n""border-radius:10px;\n""border-style:solid;\n""border-width:1px;\n""")
         self.nomClient.setText("")
         self.nomClient.setObjectName("nomClient")
         self.gridLayout.addWidget(self.nomClient, 2, 1, 1, 1)
@@ -168,11 +131,7 @@ class Ui_Incrpatient(object):
         self.label_9.setObjectName("label_9")
         self.gridLayout.addWidget(self.label_9, 3, 0, 1, 1)
         self.prof = QtWidgets.QLineEdit(self.groupBox)
-        self.prof.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+        self.prof.setStyleSheet("border-color:black;\n""border-radius:10px;\n""border-style:solid;\n""border-width:1px;\n""")
         self.prof.setObjectName("prof")
         self.gridLayout.addWidget(self.prof, 3, 1, 1, 1)
         self.label_11 = QtWidgets.QLabel(self.groupBox)
@@ -233,4 +192,3 @@ if __name__ == "__main__":
     ui.setupUi(Incrpatient)
     Incrpatient.show()
     sys.exit(app.exec_())
-

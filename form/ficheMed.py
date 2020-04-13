@@ -27,9 +27,7 @@ class Ui_Dialog(object):
         font.setWeight(75)
         self.label_3.setFont(font)
         self.label_3.setWhatsThis("")
-        self.label_3.setStyleSheet("border-style:solid;\n"
-"border-width:2px;\n"
-"border-color:black;")
+        self.label_3.setStyleSheet("border-style:solid;\n""border-width:2px;\n""border-color:black;")
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(Dialog)
         self.label_4.setGeometry(QtCore.QRect(770, 0, 141, 111))
@@ -243,4 +241,3 @@ if __name__ == "__main__":
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
-

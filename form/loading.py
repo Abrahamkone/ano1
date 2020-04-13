@@ -16,13 +16,11 @@ class Ui_Loging(object):
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setGeometry(QtCore.QRect(10, 20, 601, 401))
-        self.groupBox.setStyleSheet("Border-radius: 10px;\n"
-"background-color: rgb(218, 218, 218);")
+        self.groupBox.setStyleSheet("Border-radius: 10px;\n""background-color: rgb(218, 218, 218);")
         self.groupBox.setObjectName("groupBox")
         self.frame = QtWidgets.QFrame(self.groupBox)
         self.frame.setGeometry(QtCore.QRect(130, 80, 331, 221))
-        self.frame.setStyleSheet("background-color: rgb(127, 127, 127);\n"
-"border-radius: 15px;")
+        self.frame.setStyleSheet("background-color: rgb(127, 127, 127);\n""border-radius: 15px;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -31,8 +29,7 @@ class Ui_Loging(object):
         self.label.setObjectName("label")
         self.progressBar = QtWidgets.QProgressBar(self.frame)
         self.progressBar.setGeometry(QtCore.QRect(47, 120, 241, 31))
-        self.progressBar.setStyleSheet("border-radius: 5px;\n"
-"background-color: rgb(255, 255, 255);")
+        self.progressBar.setStyleSheet("border-radius: 5px;\n""background-color: rgb(255, 255, 255);")
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName("progressBar")
         Loging.setCentralWidget(self.centralwidget)
@@ -58,4 +55,3 @@ if __name__ == "__main__":
     ui.setupUi(Loging)
     Loging.show()
     sys.exit(app.exec_())
-
