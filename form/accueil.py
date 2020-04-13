@@ -7,8 +7,25 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from consul import Ui_Consultation
+from saisie_Id import Ui_SaisieId
 
 class Ui_Accueil(object):
+    def overture_de_fenetre_consul(self):
+        self.Window = QtWidgets.QMainWindow()
+        self.ui = Ui_Consultation()
+        self.ui.setupUi(self.Window)
+        Accueil.hide()
+        self.Window.show()
+
+    def overture_de_fenetre_saisie_id(self):
+        self.Window = QtWidgets.QMainWindow()
+        self.ui = Ui_SaisieId()
+        self.ui.setupUi(self.Window)
+        Accueil.hide()
+        self.Window.show()
+
+
     def setupUi(self, Accueil):
         Accueil.setObjectName("Accueil")
         Accueil.resize(691, 489)
@@ -52,6 +69,9 @@ class Ui_Accueil(object):
 
         self.retranslateUi(Accueil)
         QtCore.QMetaObject.connectSlotsByName(Accueil)
+
+        self.pushButton.clicked.connect(self.overture_de_fenetre_consul)
+        self.pushButton_2.clicked.connect(self.overture_de_fenetre_saisie_id)
 
     def retranslateUi(self, Accueil):
         _translate = QtCore.QCoreApplication.translate
