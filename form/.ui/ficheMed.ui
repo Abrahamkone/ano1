@@ -306,8 +306,6 @@ border-color:black;</string>
          </item>
         </layout>
        </widget>
-       <zorder>formLayoutWidget_2</zorder>
-       <zorder>formLayoutWidget_2</zorder>
       </widget>
       <widget class="QGroupBox" name="groupBox_4">
        <property name="geometry">
@@ -336,8 +334,6 @@ border-color:black;</string>
          </font>
         </property>
        </widget>
-       <zorder>label_2</zorder>
-       <zorder>textEdit_Observation</zorder>
       </widget>
       <widget class="QGroupBox" name="groupBox_5">
        <property name="geometry">
@@ -476,7 +472,7 @@ border-color:black;</string>
   </widget>
  </widget>
  <resources>
-  <include location="../ressources/img.qrc"/>
+  <include location="../../ressources/img.qrc"/>
  </resources>
  <connections/>
 </ui>
