@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Accueil</class>
+ <widget class="QMainWindow" name="Accueil">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>691</width>
+    <height>489</height>
    </rect>
   </property>
   <property name="font">
@@ -25,7 +25,7 @@
    <widget class="QLabel" name="acceul">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>220</x>
       <y>80</y>
       <width>241</width>
       <height>41</height>
@@ -41,7 +41,7 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>170</x>
       <y>220</y>
       <width>131</width>
       <height>31</height>
@@ -54,8 +54,8 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>210</y>
+      <x>380</x>
+      <y>220</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -67,7 +67,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>220</x>
       <y>160</y>
       <width>251</width>
       <height>31</height>
@@ -89,25 +89,6 @@
      <number>8</number>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menufichier">
-    <property name="title">
-     <string>fichier</string>
-    </property>
-    <addaction name="actionenregistre"/>
-    <addaction name="actionouvrire"/>
-    <addaction name="actionquitter"/>
-   </widget>
-   <addaction name="menufichier"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionenregistre">
