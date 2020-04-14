@@ -1,0 +1,117 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file '.\ordonnance.ui'
+#
+# Created by: PyQt5 UI code generator 5.14.2
+#
+# WARNING! All changes made in this file will be lost!
+
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_ordonnace(object):
+    def setupUi(self, ordonnace):
+        ordonnace.setObjectName("ordonnace")
+        ordonnace.resize(614, 640)
+        ordonnace.setMinimumSize(QtCore.QSize(614, 640))
+        ordonnace.setMaximumSize(QtCore.QSize(614, 640))
+        self.centralwidget = QtWidgets.QWidget(ordonnace)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(230, 20, 161, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setUnderline(True)
+        font.setWeight(75)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(10, 130, 111, 16))
+        font = QtGui.QFont()
+        font.setFamily("Myanmar Text")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_3.setFont(font)
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(350, 130, 81, 20))
+        font = QtGui.QFont()
+        font.setFamily("Myanmar Text")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_4.setFont(font)
+        self.label_4.setObjectName("label_4")
+        self.date_ordonnance = QtWidgets.QDateEdit(self.centralwidget)
+        self.date_ordonnance.setGeometry(QtCore.QRect(20, 80, 81, 21))
+        self.date_ordonnance.setWrapping(False)
+        self.date_ordonnance.setFrame(False)
+        self.date_ordonnance.setAccelerated(False)
+        self.date_ordonnance.setKeyboardTracking(True)
+        self.date_ordonnance.setProperty("showGroupSeparator", False)
+        self.date_ordonnance.setCalendarPopup(True)
+        self.date_ordonnance.setObjectName("date_ordonnance")
+        self.text_ordonnace = QtWidgets.QPlainTextEdit(self.centralwidget)
+        self.text_ordonnace.setGeometry(QtCore.QRect(10, 170, 591, 381))
+        self.text_ordonnace.setPlainText("")
+        self.text_ordonnace.setObjectName("text_ordonnace")
+        self.boutton_enregistrer_ordonnance = QtWidgets.QPushButton(self.centralwidget)
+        self.boutton_enregistrer_ordonnance.setGeometry(QtCore.QRect(320, 570, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("Myanmar Text")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.boutton_enregistrer_ordonnance.setFont(font)
+        self.boutton_enregistrer_ordonnance.setObjectName("boutton_enregistrer_ordonnance")
+        self.boutton_annuler_ordonnance = QtWidgets.QPushButton(self.centralwidget)
+        self.boutton_annuler_ordonnance.setGeometry(QtCore.QRect(140, 570, 101, 41))
+        font = QtGui.QFont()
+        font.setFamily("Myanmar Text")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.boutton_annuler_ordonnance.setFont(font)
+        self.boutton_annuler_ordonnance.setObjectName("boutton_annuler_ordonnance")
+        self.label_patient_ordonnance = QtWidgets.QLabel(self.centralwidget)
+        self.label_patient_ordonnance.setGeometry(QtCore.QRect(120, 120, 221, 31))
+        self.label_patient_ordonnance.setFrameShape(QtWidgets.QFrame.Panel)
+        self.label_patient_ordonnance.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.label_patient_ordonnance.setText("")
+        self.label_patient_ordonnance.setObjectName("label_patient_ordonnance")
+        self.label_medecin_ordonnance = QtWidgets.QLabel(self.centralwidget)
+        self.label_medecin_ordonnance.setGeometry(QtCore.QRect(430, 120, 171, 31))
+        self.label_medecin_ordonnance.setToolTip("")
+        self.label_medecin_ordonnance.setFrameShape(QtWidgets.QFrame.Panel)
+        self.label_medecin_ordonnance.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.label_medecin_ordonnance.setText("")
+        self.label_medecin_ordonnance.setObjectName("label_medecin_ordonnance")
+        ordonnace.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(ordonnace)
+        self.statusbar.setObjectName("statusbar")
+        ordonnace.setStatusBar(self.statusbar)
+
+        self.retranslateUi(ordonnace)
+        QtCore.QMetaObject.connectSlotsByName(ordonnace)
+
+    def retranslateUi(self, ordonnace):
+        _translate = QtCore.QCoreApplication.translate
+        ordonnace.setWindowTitle(_translate("ordonnace", "Ordonnace"))
+        self.label.setText(_translate("ordonnace", "ORDONNANCE"))
+        self.label_3.setText(_translate("ordonnace", "Nom et Prenoms : "))
+        self.label_4.setText(_translate("ordonnace", "Medecin:"))
+        self.boutton_enregistrer_ordonnance.setText(_translate("ordonnace", "Enregistrer"))
+        self.boutton_annuler_ordonnance.setText(_translate("ordonnace", "Annuler"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    ordonnace = QtWidgets.QMainWindow()
+    ui = Ui_ordonnace()
+    ui.setupUi(ordonnace)
+    ordonnace.show()
+    sys.exit(app.exec_())
