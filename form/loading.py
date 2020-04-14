@@ -6,9 +6,17 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from imp import *
 
 class Ui_Loging(object):
+
+    def suivant(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Login()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        Loging.hide()
+
     def setupUi(self, Loging):
         Loging.setObjectName("Loging")
         Loging.resize(628, 468)
@@ -54,4 +62,10 @@ if __name__ == "__main__":
     ui = Ui_Loging()
     ui.setupUi(Loging)
     Loging.show()
+    for i in range(1, 999):
+        ui.progressBar.setValue(i)
+        t = time.time()
+        while time.time() < t + 0.009:
+           app.processEvents()
+    ui.suivant()
     sys.exit(app.exec_())

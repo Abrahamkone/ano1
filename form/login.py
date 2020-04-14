@@ -5,10 +5,16 @@
 # Created by: PyQt5 UI code generator 5.6
 #
 # WARNING! All changes made in this file will be lost!
-
-from PyQt5 import QtCore, QtGui, QtWidgets
+from imp import *
 
 class Ui_Login(object):
+    #Pour afficher la fenêtre acceuil
+    def open_Ui_Acceuil(self):
+        self.Accueil = QtWidgets.QMainWindow()
+        self.ui = Ui_Accueil()
+        self.ui.setupUi(self.Accueil)
+        self.Accueil.show()
+
     def setupUi(self, Login):
         Login.setObjectName("Login")
         Login.resize(628, 553)
@@ -58,6 +64,36 @@ class Ui_Login(object):
 
         self.retranslateUi(Login)
         QtCore.QMetaObject.connectSlotsByName(Login)
+        self.connexion.clicked.connect(self.login_handler)
+
+    #Connection et vérification information comnnection
+    def login_handler(self):
+        pseudo = self.username_log.text()
+        pwd = self.password.text()
+        conx, cur = connexion()
+        try:
+            cur.execute("""SELECT * FROM connexion""")
+        except Exception as e:
+            print(e)
+        rows = cur.fetchall()
+        for row in rows:
+            if pseudo  == row[1] and pwd == row[2]:
+                print("connected")
+                msg = QMessageBox()
+                msg.setWindowTitle("Succes")
+                msg.setText("Vous êtes connecté")
+                self.open_acc()
+            else:
+                print("not connected")
+                msg = QMessageBox()
+                msg.setWindowTitle("Alert")
+                msg.setText("Pseudo ou Password incorrect veuiller recommencer")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec_()
+
+    def open_acc(self):
+        self.open_Ui_Acceuil()
+        # Login.hide()
 
     def retranslateUi(self, Login):
         _translate = QtCore.QCoreApplication.translate
@@ -79,4 +115,3 @@ if __name__ == "__main__":
     ui.setupUi(Login)
     Login.show()
     sys.exit(app.exec_())
-
