@@ -8,9 +8,16 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+# from accueil import Ui_Accueil  #Brindou 
 
 class Ui_SaisieId(object):
+    # def retour_accueil(self):                     #Brindou
+    #     self.Window = QtWidgets.QMainWindow()     #Brindou
+    #     self.ui = Ui_Accueil()                    #Brindou
+    #     self.ui.setupUi(self.Window)              #Brindou
+    #     SaisieId.hide()                           #Brindou
+    #     self.Window.show()                        #Brindou
+
     def setupUi(self, SaisieId):
         SaisieId.setObjectName("SaisieId")
         SaisieId.setWindowModality(QtCore.Qt.NonModal)
@@ -55,6 +62,9 @@ class Ui_SaisieId(object):
 
         self.retranslateUi(SaisieId)
         QtCore.QMetaObject.connectSlotsByName(SaisieId)
+
+        # self.button_Annuler_Id.clicked.connect(self.retour_accueil)               #Brindou
+
 
     def retranslateUi(self, SaisieId):
         _translate = QtCore.QCoreApplication.translate
