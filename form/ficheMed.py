@@ -7,8 +7,15 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from ordonnance import Ui_ordonnace
 class Ui_Dialog(object):
+    def overture_de_fenetre_ordonnance(self):
+        self.Window = QtWidgets.QMainWindow()
+        self.ui = Ui_ordonnace()
+        self.ui.setupUi(self.Window)
+        self.Window.show()
+
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(916, 683)
@@ -208,6 +215,9 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+
+        self.commandLinkButtonOrdonance.clicked.connect(self.overture_de_fenetre_ordonnance)
+
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
@@ -227,7 +237,8 @@ class Ui_Dialog(object):
         self.groupBox_4.setTitle(_translate("Dialog", "Observations"))
         self.groupBox_5.setTitle(_translate("Dialog", "Diagnostic"))
         self.label_2.setText(_translate("Dialog", "Symptôme:"))
-        self.commandLinkButtonOrdonance.setText(_translate("Dialog", "Prescrire une ordonance médicale"))
+        self.commandLinkButtonOrdonance.setText(
+            _translate("Dialog", "Prescrire une ordonance médicale"))
         self.pushButtonTerminer.setText(_translate("Dialog", "Terminer la consultation"))
         self.pushButton.setText(_translate("Dialog", "Retour"))
 
