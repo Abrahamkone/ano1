@@ -5,15 +5,14 @@
 # Created by: PyQt5 UI code generator 5.6
 #
 # WARNING! All changes made in this file will be lost!
-from imp import *
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
+import sqlite3
+from accueil import Ui_Accueil
 
 class Ui_Login(object):
     #Pour afficher la fenêtre acceuil
-    def open_Ui_Acceuil(self):
-        self.Accueil = QtWidgets.QMainWindow()
-        self.ui = Ui_Accueil()
-        self.ui.setupUi(self.Accueil)
-        self.Accueil.show()
+
 
     def setupUi(self, Login):
         Login.setObjectName("Login")
@@ -91,6 +90,11 @@ class Ui_Login(object):
                 msg.setText("Pseudo ou Password incorrect veuiller recommencer")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
+    def open_Ui_Acceuil(self):
+        self.Accueil = QtWidgets.QMainWindow()
+        self.ui = Ui_Accueil()
+        self.ui.setupUi(self.Accueil)
+        self.Accueil.show()
 
     def open_acc(self):
         self.open_Ui_Acceuil()

@@ -6,7 +6,11 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from imp import *
+from PyQt5 import QtCore, QtGui, QtWidgets
+import img_rc
+import sys
+import time
+from login import *
 
 class Ui_Loging(object):
 

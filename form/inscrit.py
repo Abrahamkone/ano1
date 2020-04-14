@@ -7,8 +7,54 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
+import sys
+import sqlite3
+from accueil import *
+from login import *
 
 class Ui_Inscrit(object):
+
+    def save_handler(self):
+        nom = self.nomClient.text()
+        prenom = self.prenomClient.text()
+        sexe = self.sexe.currentText()
+        dateNaiss = "14/04/2020"
+        cni = self.cni_Client.text()
+        profession = self.prof.text()
+        tel = self.cont.text()
+        email = self.mail.text()
+        assurance = self.sexe_3.currentText()
+        lien ="c://zerzerzerzer"
+        id_patient = "{}{}{}".format(nom[0].upper(),prenom[0].upper(),tel[0:3])
+        element = (id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien)
+        conx = sqlite3.connect('../config/santeplus.db')
+        cur = conx.cursor()
+        try:
+            cur.execute("""INSERT INTO patient(id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien_photo) VALUES(?,?,?,?,?,?,?,?,?,?,?)""",element)
+            print("ok")
+            conx.commit()
+            msg = QMessageBox()
+            msg.setWindowTitle("Succes")
+            msg.setText("Enregistrement effectué avec succes")
+        except Exception as e:
+            print('expect',e)
+            print('fail')
+            msg = QMessageBox()
+            msg.setWindowTitle("Echec")
+            msg.setText("Echec de connexion")
+        conx.close()
+        # if(res):
+        #     print("ok")
+        #     msg = QMessageBox()
+        #     msg.setWindowTitle("Succes")
+        #     msg.setText("Enregistrement effectué avec succes")
+        # else:
+        #     print('fail')
+        #     msg = QMessageBox()
+        #     msg.setWindowTitle("Echec")
+        #     msg.setText("Echec de connexion")
+
     def setupUi(self, Inscrit):
         Inscrit.setObjectName("Inscrit")
         Inscrit.resize(800, 600)
@@ -179,6 +225,15 @@ class Ui_Inscrit(object):
 
         self.retranslateUi(Inscrit)
         QtCore.QMetaObject.connectSlotsByName(Inscrit)
+        self.save.clicked.connect(self.save_handler)
+        self.ann.clicked.connect(self.annuler_btn)
+
+    def annuler_btn(self):
+        self.Accueil = QtWidgets.QMainWindow()
+        self.ui = Ui_Accueil()
+        self.ui.setupUi(self.Accueil)
+        self.Accueil.show()
+        Inscrit.hide()
 
     def retranslateUi(self, Inscrit):
         _translate = QtCore.QCoreApplication.translate
@@ -219,4 +274,3 @@ if __name__ == "__main__":
     ui.setupUi(Inscrit)
     Inscrit.show()
     sys.exit(app.exec_())
-
