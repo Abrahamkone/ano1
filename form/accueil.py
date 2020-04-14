@@ -20,12 +20,6 @@ class Ui_Accueil(object):
         self.ui.setupUi(self.Window)
         self.Window.show()
 
-    def overture_de_fenetre_consul(self):
-        self.Window = QtWidgets.QMainWindow()
-        self.ui = Ui_Consultation()
-        self.ui.setupUi(self.Window)
-        self.Window.show()
-
     def overture_de_fenetre_saisie_id(self):
         #no touch
         self.Window = QtWidgets.QMainWindow()
@@ -297,7 +291,7 @@ class Ui_Accueil(object):
 
         #le boutton a pour nom : pushbutton et la metode overture_de_fenetre_consul est define en haut
         # son role : au clic, une connexion est faite avec la methode qui s'execute
-        self.pushButton.clicked.connect(self.overture_de_fenetre_consul)
+        self.pushButton.clicked.connect(self.overture_de_fenetre_saisie_id)
         # le nom du bouton : pushButton_2  = ouvre la fenetre saisie de id (:
         self.pushButton_2.clicked.connect(self.overture_de_fenetre_saisie_id)
         self.boutton_Inscription.clicked.connect(

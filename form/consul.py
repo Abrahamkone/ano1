@@ -57,6 +57,7 @@ class Ui_Consultation(object):
         self.pushButton.clicked.connect(self.overture_de_fenetre_inscription)
 
 
+
     def retranslateUi(self, Consultation):
         _translate = QtCore.QCoreApplication.translate
         Consultation.setWindowTitle(_translate("Consultation", "MainWindow"))
