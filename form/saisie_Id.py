@@ -8,7 +8,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-# from accueil import Ui_Accueil  #Brindou 
+from ficheMed import *
+import sqlite3
+# from accueil import Ui_Accueil  #Brindou
+
+
 
 class Ui_SaisieId(object):
     # def retour_accueil(self):                     #Brindou
@@ -17,6 +21,24 @@ class Ui_SaisieId(object):
     #     self.ui.setupUi(self.Window)              #Brindou
     #     SaisieId.hide()                           #Brindou
     #     self.Window.show()                        #Brindou
+
+    def verify_handler(self):
+        id_patient = self.id_Patient.text()
+        conx = sqlite3.connect('../config/santeplus.db')
+        cur = conx.cursor()
+        try:
+            cur.execute("""SELECT * FROM patient WHERE id_patient ="{}" """.format(id_patient))
+            print("ok")
+        except Exception as e:
+            print("error: ",e)
+            print("Vous n'êtes pas inscrit!!")
+        res= cur.fetchall()
+        if len(res)!=0:
+            self.open_ficheMed()
+        else:
+            msg = QMessageBox()
+            msg.setWindowTitle("Echec")
+            msg.setText("Vous n'êtes pas inscrit")
 
     def setupUi(self, SaisieId):
         SaisieId.setObjectName("SaisieId")
@@ -38,10 +60,8 @@ class Ui_SaisieId(object):
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        self.id_Patient = QtWidgets.QTextBrowser(SaisieId)
+        self.id_Patient = QtWidgets.QLineEdit(SaisieId)
         self.id_Patient.setGeometry(QtCore.QRect(70, 110, 291, 31))
-        self.id_Patient.setMouseTracking(True)
-        self.id_Patient.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.id_Patient.setObjectName("id_Patient")
         self.boutton_Valider_Id = QtWidgets.QPushButton(SaisieId)
         self.boutton_Valider_Id.setGeometry(QtCore.QRect(250, 162, 91, 31))
@@ -62,9 +82,16 @@ class Ui_SaisieId(object):
 
         self.retranslateUi(SaisieId)
         QtCore.QMetaObject.connectSlotsByName(SaisieId)
+        self.boutton_Valider_Id.clicked.connect(self.verify_handler)
 
-        # self.button_Annuler_Id.clicked.connect(self.retour_accueil)               #Brindou
+        # self.button_Annuler_Id.clicked.connect(self.retour_accueil)
 
+    def open_ficheMed(self):
+        self.ficheMed = QtWidgets.QMainWindow()
+        self.ui = Ui_FicheMed()
+        self.ui.setupUi(self.ficheMed)
+        # SaisieId.hide()
+        self.ficheMed.show()
 
     def retranslateUi(self, SaisieId):
         _translate = QtCore.QCoreApplication.translate
@@ -77,7 +104,7 @@ class Ui_SaisieId(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    SaisieId = QtWidgets.QDialog()
+    SaisieId = QtWidgets.QMainWindow()
     ui = Ui_SaisieId()
     ui.setupUi(SaisieId)
     SaisieId.show()

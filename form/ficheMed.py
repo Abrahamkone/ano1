@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ordonnance import Ui_ordonnace
-class Ui_Dialog(object):
+class Ui_FicheMed(object):
     def overture_de_fenetre_ordonnance(self):
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_ordonnace()
@@ -16,16 +16,16 @@ class Ui_Dialog(object):
         self.Window.show()
 
 
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(916, 683)
-        Dialog.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.label = QtWidgets.QLabel(Dialog)
+    def setupUi(self, FicheMed):
+        FicheMed.setObjectName("FicheMed")
+        FicheMed.resize(916, 683)
+        FicheMed.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.label = QtWidgets.QLabel(FicheMed)
         self.label.setGeometry(QtCore.QRect(0, 0, 141, 111))
         self.label.setStyleSheet("image: url(:/consul_img/img5.png);")
         self.label.setText("")
         self.label.setObjectName("label")
-        self.label_3 = QtWidgets.QLabel(Dialog)
+        self.label_3 = QtWidgets.QLabel(FicheMed)
         self.label_3.setGeometry(QtCore.QRect(190, 30, 531, 61))
         font = QtGui.QFont()
         font.setFamily("MS UI Gothic")
@@ -36,12 +36,12 @@ class Ui_Dialog(object):
         self.label_3.setWhatsThis("")
         self.label_3.setStyleSheet("border-style:solid;\n""border-width:2px;\n""border-color:black;")
         self.label_3.setObjectName("label_3")
-        self.label_4 = QtWidgets.QLabel(Dialog)
+        self.label_4 = QtWidgets.QLabel(FicheMed)
         self.label_4.setGeometry(QtCore.QRect(770, 0, 141, 111))
         self.label_4.setStyleSheet("image: url(:/consul_img/img5.png);")
         self.label_4.setText("")
         self.label_4.setObjectName("label_4")
-        self.gridLayoutWidget = QtWidgets.QWidget(Dialog)
+        self.gridLayoutWidget = QtWidgets.QWidget(FicheMed)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(60, 130, 791, 491))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
@@ -208,47 +208,47 @@ class Ui_Dialog(object):
         self.pushButtonTerminer.setObjectName("pushButtonTerminer")
         self.verticalLayout.addWidget(self.pushButtonTerminer)
         self.gridLayout.addWidget(self.groupBox, 1, 0, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(Dialog)
+        self.pushButton = QtWidgets.QPushButton(FicheMed)
         self.pushButton.setGeometry(QtCore.QRect(770, 640, 75, 23))
         self.pushButton.setObjectName("pushButton")
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(FicheMed)
+        QtCore.QMetaObject.connectSlotsByName(FicheMed)
 
 
         self.commandLinkButtonOrdonance.clicked.connect(self.overture_de_fenetre_ordonnance)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, FicheMed):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label_3.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" text-decoration: underline; color:#aaff00;\">FICHE MEDICALE</span></p></body></html>"))
-        self.groupBox.setTitle(_translate("Dialog", "Consultation"))
-        self.groupBox_2.setTitle(_translate("Dialog", "Information sur le patient"))
-        self.nomLabel.setText(_translate("Dialog", "<html><head/><body><p><span style=\" text-decoration: underline;\">Nom :</span></p></body></html>"))
-        self.prNomsLabel.setText(_translate("Dialog", "<html><head/><body><p><span style=\" text-decoration: underline;\">Prénoms :</span></p></body></html>"))
-        self.ageLabel.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:10pt; text-decoration: underline;\">Age :</span></p></body></html>"))
-        self.poidsLabel.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:10pt; text-decoration: underline;\">Poids :</span></p></body></html>"))
-        self.tailleLabel.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:10pt; text-decoration: underline;\">Taille</span></p></body></html>"))
-        self.groupBox_3.setTitle(_translate("Dialog", "Informations supplémentaires"))
-        self.allergieLabel.setText(_translate("Dialog", "Allergie :"))
-        self.tempRatureLabel.setText(_translate("Dialog", "Température:"))
-        self.mDecinTraitantLabel.setText(_translate("Dialog", "Médecin Traitant :"))
-        self.serviceLabel.setText(_translate("Dialog", "Service :"))
-        self.groupBox_4.setTitle(_translate("Dialog", "Observations"))
-        self.groupBox_5.setTitle(_translate("Dialog", "Diagnostic"))
-        self.label_2.setText(_translate("Dialog", "Symptôme:"))
+        FicheMed.setWindowTitle(_translate("FicheMed", "FicheMed"))
+        self.label_3.setText(_translate("FicheMed", "<html><head/><body><p align=\"center\"><span style=\" text-decoration: underline; color:#aaff00;\">FICHE MEDICALE</span></p></body></html>"))
+        self.groupBox.setTitle(_translate("FicheMed", "Consultation"))
+        self.groupBox_2.setTitle(_translate("FicheMed", "Information sur le patient"))
+        self.nomLabel.setText(_translate("FicheMed", "<html><head/><body><p><span style=\" text-decoration: underline;\">Nom :</span></p></body></html>"))
+        self.prNomsLabel.setText(_translate("FicheMed", "<html><head/><body><p><span style=\" text-decoration: underline;\">Prénoms :</span></p></body></html>"))
+        self.ageLabel.setText(_translate("FicheMed", "<html><head/><body><p><span style=\" font-size:10pt; text-decoration: underline;\">Age :</span></p></body></html>"))
+        self.poidsLabel.setText(_translate("FicheMed", "<html><head/><body><p><span style=\" font-size:10pt; text-decoration: underline;\">Poids :</span></p></body></html>"))
+        self.tailleLabel.setText(_translate("FicheMed", "<html><head/><body><p><span style=\" font-size:10pt; text-decoration: underline;\">Taille</span></p></body></html>"))
+        self.groupBox_3.setTitle(_translate("FicheMed", "Informations supplémentaires"))
+        self.allergieLabel.setText(_translate("FicheMed", "Allergie :"))
+        self.tempRatureLabel.setText(_translate("FicheMed", "Température:"))
+        self.mDecinTraitantLabel.setText(_translate("FicheMed", "Médecin Traitant :"))
+        self.serviceLabel.setText(_translate("FicheMed", "Service :"))
+        self.groupBox_4.setTitle(_translate("FicheMed", "Observations"))
+        self.groupBox_5.setTitle(_translate("FicheMed", "Diagnostic"))
+        self.label_2.setText(_translate("FicheMed", "Symptôme:"))
         self.commandLinkButtonOrdonance.setText(
-            _translate("Dialog", "Prescrire une ordonance médicale"))
-        self.pushButtonTerminer.setText(_translate("Dialog", "Terminer la consultation"))
-        self.pushButton.setText(_translate("Dialog", "Retour"))
+            _translate("FicheMed", "Prescrire une ordonance médicale"))
+        self.pushButtonTerminer.setText(_translate("FicheMed", "Terminer la consultation"))
+        self.pushButton.setText(_translate("FicheMed", "Retour"))
 
 import img_rc
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
+    FicheMed = QtWidgets.QMainWindow()
+    ui = Ui_FicheMed()
+    ui.setupUi(FicheMed)
+    FicheMed.show()
     sys.exit(app.exec_())
