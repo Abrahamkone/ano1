@@ -13,6 +13,7 @@ from login import *
 from loading import *
 from saisie_Id import *
 from supression import *
+import sqlite3
 
 if __name__ == '__main__':
     from PyQt5 import QtCore, QtGui, QtWidgets
@@ -30,3 +31,4 @@ if __name__ == '__main__':
     from loading import *
     from saisie_Id import *
     from supression import *
+    import sqlite3

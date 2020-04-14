@@ -70,7 +70,8 @@ class Ui_Login(object):
     def login_handler(self):
         pseudo = self.username_log.text()
         pwd = self.password.text()
-        conx, cur = connexion()
+        conx = sqlite3.connect('../config/santeplus.db')
+        cur = conx.cursor()
         try:
             cur.execute("""SELECT * FROM connexion""")
         except Exception as e:
