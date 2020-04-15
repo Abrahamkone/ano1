@@ -15,19 +15,20 @@ from time import strftime
 
 nom = "nomTest"
 prenom = "prenomTest"
-nom_med = "no_med"
+nm = "none"
 d = str(datetime.now()).split(" ")
 
 class Ui_FicheMed(object):
 
     def overture_de_fenetre_ordonnance(self):
         from ordonnance import Ui_ordonnace
-        print("nom med ={} et date = {}".format(nom_med,d[0]))
+        global nm
+        nm = self.comboBox_medTrait.currentText()
+        print("nom med ={} et date = {}".format(nm,d[0]))
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_ordonnace()
         self.ui.setupUi(self.Window)
         self.Window.show()
-
     def select_value(self):
         from saisie_Id import identify
         global nom, prenom
@@ -36,7 +37,7 @@ class Ui_FicheMed(object):
         cur = conx.cursor()
         try:
             cur.execute("""SELECT nom,prenom FROM patient WHERE id_patient ="{}" """.format(identify))
-            print("SQL --> ok")
+            print("SQL SELECT TABLE patient --> ok")
         except Exception as e:
             print("error: ",e)
             print("SQL --> fail")
@@ -48,7 +49,6 @@ class Ui_FicheMed(object):
 
     def insert_handler(self):
         from saisie_Id import identify
-        global nom_med
         date = d[0]
         heure = d[1]
         service = self.serviceComboBox.currentText()
@@ -63,7 +63,7 @@ class Ui_FicheMed(object):
         cur = conx.cursor()
         try:
             cur.execute("""INSERT INTO consultation(date_consul,heure,service,id_patient,allergie,temperature,observation,symptome,nom_med) VALUES(?,?,?,?,?,?,?,?,?)""",element)
-            print("SQL --> ok")
+            print("SQL INSERTION TABLE consultation --> ok")
             conx.commit()
             msg = QMessageBox()
             msg.setWindowTitle("Succes")

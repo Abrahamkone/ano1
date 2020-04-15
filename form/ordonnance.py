@@ -8,10 +8,49 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtWidgets import QMessageBox
+import sqlite3
 
 class Ui_ordonnace(object):
+    def insert_ordonnance(self):
+        from saisie_Id import identify
+        from ficheMed import Ui_FicheMed,d,nm #d represente la date ne pas effacer
+        nom_med = nm
+        conx = sqlite3.connect('../config/santeplus.db')
+        cur = conx.cursor()
+        try:
+            cur.execute("""SELECT id_med FROM medecin WHERE nom="{}" """.format(nom_med)) #On recupère l'id du medecin
+        except Exception as e:
+            print("error select id_med :",e)
+
+        res = cur.fetchall()
+        print("len = ",len(res))
+        id_med = res[0][0]
+
+        medicaments = self.text_ordonnace.toPlainText()
+        element =(medicaments,d[0],id_med,identify)
+        try:
+            cur.execute("""INSERT INTO ordonnance(medicaments,date,id_med,id_patient) VALUES(?,?,?,?)""",element)
+            print("SQL INSERTION TABLE ordonance --> ok")
+            conx.commit()
+            msg = QMessageBox()
+            msg.setWindowTitle("Succes")
+            msg.setText("Enregistrement effectué avec succes")
+            msg.exec_()
+        except Exception as e:
+            print('Error in ordonance : ',e)
+            print('SQL --> fail')
+            msg = QMessageBox()
+            msg.setWindowTitle("Echec")
+            msg.setText("Echec de connexion")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+
+        conx.close()
+
     def setupUi(self, ordonnace):
+        from ficheMed import nom,prenom,Ui_FicheMed,nm
+        nom_med = nm
         ordonnace.setObjectName("ordonnace")
         ordonnace.resize(614, 640)
         ordonnace.setMinimumSize(QtCore.QSize(614, 640))
@@ -80,14 +119,14 @@ class Ui_ordonnace(object):
         self.label_patient_ordonnance.setGeometry(QtCore.QRect(120, 120, 221, 31))
         self.label_patient_ordonnance.setFrameShape(QtWidgets.QFrame.Panel)
         self.label_patient_ordonnance.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.label_patient_ordonnance.setText("")
+        self.label_patient_ordonnance.setText("{} {}".format(nom,prenom))
         self.label_patient_ordonnance.setObjectName("label_patient_ordonnance")
         self.label_medecin_ordonnance = QtWidgets.QLabel(self.centralwidget)
         self.label_medecin_ordonnance.setGeometry(QtCore.QRect(430, 120, 171, 31))
         self.label_medecin_ordonnance.setToolTip("")
         self.label_medecin_ordonnance.setFrameShape(QtWidgets.QFrame.Panel)
         self.label_medecin_ordonnance.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.label_medecin_ordonnance.setText("")
+        self.label_medecin_ordonnance.setText("{}".format(nom_med))
         self.label_medecin_ordonnance.setObjectName("label_medecin_ordonnance")
         ordonnace.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(ordonnace)
@@ -96,6 +135,7 @@ class Ui_ordonnace(object):
 
         self.retranslateUi(ordonnace)
         QtCore.QMetaObject.connectSlotsByName(ordonnace)
+        self.boutton_enregistrer_ordonnance.clicked.connect(self.insert_ordonnance)
 
     def retranslateUi(self, ordonnace):
         _translate = QtCore.QCoreApplication.translate
