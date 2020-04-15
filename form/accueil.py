@@ -25,7 +25,7 @@ class Ui_Accueil(object):
         self.ui = Ui_Modif()
         self.ui.setupUi(self.Window)
         self.Window.show()
-        
+
     def overture_de_fenetre_saisie_id(self):
         from saisie_Id import Ui_SaisieId
         #no touch
