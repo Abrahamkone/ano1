@@ -62,10 +62,18 @@ CREATE TABLE IF NOT EXISTS "medecin" (
 	"specialité"	TEXT
 );
 INSERT INTO "consultation" ("id_consultation","date_consul","heure","service","id_patient","allergie","temperature","observation","symptome","nom_med") VALUES (1,'2020-04-15','03:37:30.340819','','AN99','',45,'ljgljgjgljqc','qxcqx',''),
- (2,'2020-04-15','03:38:12.972425','','AN99','',33,'vvvhhv,h,v','wxcwxc','');
+ (2,'2020-04-15','03:38:12.972425','','AN99','',33,'vvvhhv,h,v','wxcwxc',''),
+ (3,'2020-04-15','13:05:51.277761','URGENCE','KI896','PIQURES',37.2,'MGJMJDFGDFG','SDFSLLK','DR JOSUE'),
+ (4,'2020-04-15','16:45:24.578102','GYNECOLOGIE','KI896','CHLOROQUINE',45,'sdqdqds','RAS','DR IBRAHIM');
 INSERT INTO "patient" ("id_patient","nom","prenom","sexe","dateNaiss","cni","profession","tel","email","assurance","lien_photo") VALUES ('AN99','gael','sedrick','HOMME','12/12/1996','CNI789','python',757755.0,'mail','assufar','dsfsdfsdfsdf'),
  ('DA454','dsdf','aze','FEMME','14/04/2020','azeaze77','azeae',45454.0,'zerzer','assurace','c://zerzerzerzer'),
  ('KI896','kone','ibrahim','HOMME','14/04/2020','AN45DD','programmeur',89652312.0,'kone@gmail.com','mugefci','c://zerzerzerzer'),
  ('VG','vddd','gfddd','','14/04/2020','','','','','','c://zerzerzerzer');
 INSERT INTO "connexion" ("id","pseudo","password") VALUES (28,'admin','santeplus');
+INSERT INTO "ordonnance" ("id_ord","medicaments","date","id_med","id_patient") VALUES (1,'zerc','2020-04-15',2,'KI896'),
+ (2,'zerzer','2020-04-15',3,'KI896');
+INSERT INTO "medecin" ("id_med","nom","prenom","specialité") VALUES (1,'DR JOSUE','JONATHAN','PEDIATRE'),
+ (2,'DR GAËL','SEDRICK','OPHTALMOLOGUE'),
+ (3,'DR IBRAHIM','ZIE','GYNECOLOGUE'),
+ (4,'DR SILVA','PATRICK','URGENTISTE');
 COMMIT;
