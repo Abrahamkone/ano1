@@ -37,6 +37,16 @@ class Ui_Accueil(object):
         #devine(:
         self.Window.show()
 
+    def overture_de_fenetre_saisie_id_rdv(self):
+        from saisie_Id import Ui_SaisieId
+        self.Window = QtWidgets.QMainWindow()
+        #Ui_saisieId varie selon la fenetre qu'on veut afficher
+        self.ui = Ui_SaisieId()
+        self.ui.setupUi(self.Window)
+        #juste pour faire disparaitre la fenetre courante
+        #devine(:
+        self.Window.show()
+
 
     def fonctionClickSupprimer(self):
         buttonReponse = QMessageBox.question(self, 'Attention ! ', 'Voulez vous vraiment Supprimer ?',
