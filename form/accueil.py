@@ -8,19 +8,19 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from consul import Ui_Consultation
-from saisie_Id import Ui_SaisieId
-from inscrit import Ui_Inscrit
+
 from PyQt5.QtWidgets import QMessageBox
 
 class Ui_Accueil(object):
     def overture_de_fenetre_inscrit(self):
+        from inscrit import Ui_Inscrit
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_Inscrit()
         self.ui.setupUi(self.Window)
         self.Window.show()
 
     def overture_de_fenetre_saisie_id(self):
+        from saisie_Id import Ui_SaisieId
         #no touch
         self.Window = QtWidgets.QMainWindow()
         #Ui_saisieId varie selon la fenetre qu'on veut afficher

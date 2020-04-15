@@ -9,11 +9,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-from ficheMed import *
 import sqlite3
 # from accueil import Ui_Accueil  #Brindou
 
-id = "none"
+identify = "none"
 class Ui_SaisieId(object):
     # def retour_accueil(self):                     #Brindou
     #     self.Window = QtWidgets.QMainWindow()     #Brindou
@@ -23,7 +22,7 @@ class Ui_SaisieId(object):
     #     self.Window.show()                        #Brindou
 
     def verify_handler(self):
-        global id
+        global identify
         id_patient = self.id_Patient.text()
         conx = sqlite3.connect('../config/santeplus.db')
         cur = conx.cursor()
@@ -35,11 +34,11 @@ class Ui_SaisieId(object):
             print("SQL --> fail")
         res= cur.fetchall()
         if len(res)!=0:
-            id = res[0][0]
-            print("id =",id)
+            identify= res[0][0]
+            print("id =",identify)
             self.open_ficheMed()
         else:
-            print("id =",id)
+            print("id =",identify)
             msg = QMessageBox()
             msg.setWindowTitle("Echec")
             msg.setText("Vous n'êtes pas inscrit")
@@ -93,6 +92,7 @@ class Ui_SaisieId(object):
         # self.button_Annuler_Id.clicked.connect(self.retour_accueil)
 
     def open_ficheMed(self):
+        from ficheMed import Ui_FicheMed
         self.ficheMed = QtWidgets.QMainWindow()
         self.ui = Ui_FicheMed()
         self.ui.setupUi(self.ficheMed)

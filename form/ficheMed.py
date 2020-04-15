@@ -7,14 +7,73 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from ordonnance import Ui_ordonnace
+from PyQt5.QtWidgets import QMessageBox
+
+import sqlite3
+from datetime import datetime
+from time import strftime
+
+nom = "nomTest"
+prenom = "prenomTest"
+
 class Ui_FicheMed(object):
     def overture_de_fenetre_ordonnance(self):
+        from ordonnance import Ui_ordonnace
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_ordonnace()
         self.ui.setupUi(self.Window)
         self.Window.show()
 
+    def select_value(self):
+        from saisie_Id import identify
+        global nom, prenom
+        print("value id = ",identify)
+        conx = sqlite3.connect('../config/santeplus.db')
+        cur = conx.cursor()
+        try:
+            cur.execute("""SELECT nom,prenom FROM patient WHERE id_patient ="{}" """.format(identify))
+            print("SQL --> ok")
+        except Exception as e:
+            print("error: ",e)
+            print("SQL --> fail")
+        res= cur.fetchall()
+        print(len(res))
+        nom = res[0][0]
+        prenom = res[0][1]
+        conx.close()
+
+    def insert_handler(self):
+        from saisie_Id import identify
+        d = str(datetime.now()).split(" ")
+        date = d[0]
+        heure = d[1]
+        service = self.serviceComboBox.currentText()
+        id_patient = identify
+        allergie = self.allergieComboBox.currentText()
+        temperature = self.tempRatureLineEdit.text()
+        observation = self.textEdit_Observation.toPlainText()
+        symptome = self.lineEdit_Symptome.text()
+        nom_med = self.comboBox_medTrait.currentText()
+        element = (date,heure,service,id_patient,allergie,temperature,observation,symptome,nom_med)
+        conx = sqlite3.connect('../config/santeplus.db')
+        cur = conx.cursor()
+        try:
+            cur.execute("""INSERT INTO consultation(date_consul,heure,service,id_patient,allergie,temperature,observation,symptome,nom_med) VALUES(?,?,?,?,?,?,?,?,?)""",element)
+            print("SQL --> ok")
+            conx.commit()
+            msg = QMessageBox()
+            msg.setWindowTitle("Succes")
+            msg.setText("Enregistrement effectué avec succes")
+            msg.exec_()
+        except Exception as e:
+            print('Error in consultation : ',e)
+            print('SQL --> fail')
+            msg = QMessageBox()
+            msg.setWindowTitle("Echec")
+            msg.setText("Echec de connexion")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+        conx.close()
 
     def setupUi(self, FicheMed):
         FicheMed.setObjectName("FicheMed")
@@ -62,6 +121,11 @@ class Ui_FicheMed(object):
         self.formLayout.setSpacing(3)
         self.formLayout.setObjectName("formLayout")
         self.nomLabel = QtWidgets.QLabel(self.formLayoutWidget)
+
+        #pour afficher les info du patient
+        self.select_value()
+        #---------------------------
+
         font = QtGui.QFont()
         font.setPointSize(10)
         self.nomLabel.setFont(font)
@@ -70,6 +134,9 @@ class Ui_FicheMed(object):
         self.nomLineEdit = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.nomLineEdit.setEnabled(False)
         self.nomLineEdit.setObjectName("nomLineEdit")
+
+        self.nomLineEdit.setText(nom)
+
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.nomLineEdit)
         self.prNomsLabel = QtWidgets.QLabel(self.formLayoutWidget)
         font = QtGui.QFont()
@@ -80,6 +147,9 @@ class Ui_FicheMed(object):
         self.prNomsLineEdit = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.prNomsLineEdit.setEnabled(False)
         self.prNomsLineEdit.setObjectName("prNomsLineEdit")
+
+        self.prNomsLineEdit.setText(prenom)
+
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.prNomsLineEdit)
         self.ageLabel = QtWidgets.QLabel(self.formLayoutWidget)
         self.ageLabel.setObjectName("ageLabel")
@@ -214,6 +284,7 @@ class Ui_FicheMed(object):
 
         self.retranslateUi(FicheMed)
         QtCore.QMetaObject.connectSlotsByName(FicheMed)
+        self.pushButtonTerminer.clicked.connect(self.insert_handler)
 
 
         self.commandLinkButtonOrdonance.clicked.connect(self.overture_de_fenetre_ordonnance)
