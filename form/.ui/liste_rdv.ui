@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>liste_rdv</class>
+ <widget class="QMainWindow" name="liste_rdv">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>656</width>
+    <height>236</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Liste des patients</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTableWidget" name="liste_rdv_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>20</y>
+      <width>491</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Date de consultation</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Heure</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Nom du medecin</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date de rendez-vous</string>
+     </property>
+    </column>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
