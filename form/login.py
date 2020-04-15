@@ -82,6 +82,7 @@ class Ui_Login(object):
                 msg = QMessageBox()
                 msg.setWindowTitle("Succes")
                 msg.setText("Vous êtes connecté")
+                msg.exec_()
                 self.open_acc()
             else:
                 print("not connected")

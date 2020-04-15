@@ -8,12 +8,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 from ficheMed import *
 import sqlite3
 # from accueil import Ui_Accueil  #Brindou
 
-
-
+id = "none"
 class Ui_SaisieId(object):
     # def retour_accueil(self):                     #Brindou
     #     self.Window = QtWidgets.QMainWindow()     #Brindou
@@ -23,22 +23,28 @@ class Ui_SaisieId(object):
     #     self.Window.show()                        #Brindou
 
     def verify_handler(self):
+        global id
         id_patient = self.id_Patient.text()
         conx = sqlite3.connect('../config/santeplus.db')
         cur = conx.cursor()
         try:
             cur.execute("""SELECT * FROM patient WHERE id_patient ="{}" """.format(id_patient))
-            print("ok")
+            print("SQL --> ok")
         except Exception as e:
             print("error: ",e)
-            print("Vous n'êtes pas inscrit!!")
+            print("SQL --> fail")
         res= cur.fetchall()
         if len(res)!=0:
+            id = res[0][0]
+            print("id =",id)
             self.open_ficheMed()
         else:
+            print("id =",id)
             msg = QMessageBox()
             msg.setWindowTitle("Echec")
             msg.setText("Vous n'êtes pas inscrit")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
 
     def setupUi(self, SaisieId):
         SaisieId.setObjectName("SaisieId")
@@ -99,7 +105,6 @@ class Ui_SaisieId(object):
         self.label.setText(_translate("SaisieId", "Numero Unique"))
         self.boutton_Valider_Id.setText(_translate("SaisieId", "Valider"))
         self.button_Annuler_Id.setText(_translate("SaisieId", "Annuler"))
-
 
 if __name__ == "__main__":
     import sys

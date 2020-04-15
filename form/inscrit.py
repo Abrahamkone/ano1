@@ -32,17 +32,20 @@ class Ui_Inscrit(object):
         cur = conx.cursor()
         try:
             cur.execute("""INSERT INTO patient(id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien_photo) VALUES(?,?,?,?,?,?,?,?,?,?,?)""",element)
-            print("ok")
+            print("SQL --> ok")
             conx.commit()
             msg = QMessageBox()
             msg.setWindowTitle("Succes")
             msg.setText("Enregistrement effectué avec succes")
+            msg.exec_()
         except Exception as e:
-            print('expect',e)
-            print('fail')
+            print('Error : ',e)
+            print('SQL --> fail')
             msg = QMessageBox()
             msg.setWindowTitle("Echec")
             msg.setText("Echec de connexion")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
         conx.close()
         # if(res):
         #     print("ok")
