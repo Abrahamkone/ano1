@@ -15,10 +15,14 @@ from time import strftime
 
 nom = "nomTest"
 prenom = "prenomTest"
+nom_med = "no_med"
+d = str(datetime.now()).split(" ")
 
 class Ui_FicheMed(object):
+
     def overture_de_fenetre_ordonnance(self):
         from ordonnance import Ui_ordonnace
+        print("nom med ={} et date = {}".format(nom_med,d[0]))
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_ordonnace()
         self.ui.setupUi(self.Window)
@@ -44,7 +48,7 @@ class Ui_FicheMed(object):
 
     def insert_handler(self):
         from saisie_Id import identify
-        d = str(datetime.now()).split(" ")
+        global nom_med
         date = d[0]
         heure = d[1]
         service = self.serviceComboBox.currentText()
@@ -190,6 +194,12 @@ class Ui_FicheMed(object):
         self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.allergieLabel)
         self.allergieComboBox = QtWidgets.QComboBox(self.formLayoutWidget_2)
         self.allergieComboBox.setObjectName("allergieComboBox")
+        self.allergieComboBox.addItem("")
+        self.allergieComboBox.setItemText(0, "")
+        self.allergieComboBox.addItem("")
+        self.allergieComboBox.addItem("")
+        self.allergieComboBox.addItem("")
+        self.allergieComboBox.addItem("")
         self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.allergieComboBox)
         self.tempRatureLabel = QtWidgets.QLabel(self.formLayoutWidget_2)
         font = QtGui.QFont()
@@ -217,9 +227,21 @@ class Ui_FicheMed(object):
         self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.serviceLabel)
         self.serviceComboBox = QtWidgets.QComboBox(self.formLayoutWidget_2)
         self.serviceComboBox.setObjectName("serviceComboBox")
+        self.serviceComboBox.addItem("")
+        self.serviceComboBox.setItemText(0, "")
+        self.serviceComboBox.addItem("")
+        self.serviceComboBox.addItem("")
+        self.serviceComboBox.addItem("")
+        self.serviceComboBox.addItem("")
         self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.serviceComboBox)
         self.comboBox_medTrait = QtWidgets.QComboBox(self.formLayoutWidget_2)
         self.comboBox_medTrait.setObjectName("comboBox_medTrait")
+        self.comboBox_medTrait.addItem("")
+        self.comboBox_medTrait.setItemText(0, "")
+        self.comboBox_medTrait.addItem("")
+        self.comboBox_medTrait.addItem("")
+        self.comboBox_medTrait.addItem("")
+        self.comboBox_medTrait.addItem("")
         self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.comboBox_medTrait)
         self.groupBox_4 = QtWidgets.QGroupBox(self.groupBox)
         self.groupBox_4.setGeometry(QtCore.QRect(20, 200, 421, 221))
@@ -305,6 +327,18 @@ class Ui_FicheMed(object):
         self.tempRatureLabel.setText(_translate("FicheMed", "Température:"))
         self.mDecinTraitantLabel.setText(_translate("FicheMed", "Médecin Traitant :"))
         self.serviceLabel.setText(_translate("FicheMed", "Service :"))
+        self.allergieComboBox.setItemText(1, _translate("FicheMed", "CHLOROQUINE"))
+        self.allergieComboBox.setItemText(2, _translate("FicheMed", "FRUITS"))
+        self.allergieComboBox.setItemText(3, _translate("FicheMed", "NOISETTES"))
+        self.allergieComboBox.setItemText(4, _translate("FicheMed", "PIQURES"))
+        self.comboBox_medTrait.setItemText(1, _translate("FicheMed", "DR JOSUE"))
+        self.comboBox_medTrait.setItemText(2, _translate("FicheMed", "DR GAËL"))
+        self.comboBox_medTrait.setItemText(3, _translate("FicheMed", "DR IBRAHIM"))
+        self.comboBox_medTrait.setItemText(4, _translate("FicheMed", "DR SILVA"))
+        self.serviceComboBox.setItemText(1, _translate("FicheMed", "PEDIATRIE"))
+        self.serviceComboBox.setItemText(2, _translate("FicheMed", "OLPHTALMOMOGIE"))
+        self.serviceComboBox.setItemText(3, _translate("FicheMed", "GYNECOLOGIE"))
+        self.serviceComboBox.setItemText(4, _translate("FicheMed", "URGENCE"))
         self.groupBox_4.setTitle(_translate("FicheMed", "Observations"))
         self.groupBox_5.setTitle(_translate("FicheMed", "Diagnostic"))
         self.label_2.setText(_translate("FicheMed", "Symptôme:"))
