@@ -10,5 +10,5 @@ Etape2:
 Etape3:
 -Remplacer l'ancienne base de donnée par la nouvelle
 
-Etape3:
+Etape4:
 -Tester et voir si le problème est résolu
