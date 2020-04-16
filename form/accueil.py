@@ -95,6 +95,7 @@ class Ui_Accueil(object):
             if returnValue == QMessageBox.Yes:
                 try:
                     cur.execute("""DELETE FROM patient WHERE id_patient="{}" """.format(num))
+                    cur.execute("""DELETE FROM rdv WHERE id_patient="{}" """.format(num))
                     conx.commit()
                     print("SQL SUPPRESSION TABLE patient --> ok")
                     msg = QMessageBox()
