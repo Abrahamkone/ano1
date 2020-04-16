@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from PyQt5.QtWidgets import QMessageBox
 
+id_p = "none"
 
 class Ui_Accueil(object):
     def overture_de_fenetre_inscrit(self):

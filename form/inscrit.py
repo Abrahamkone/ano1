@@ -12,8 +12,6 @@ import sys
 from accueil import *
 from login import *
 
-i= 1
-
 class Ui_Inscrit(object):
 
     def save_handler(self):
@@ -24,15 +22,19 @@ class Ui_Inscrit(object):
         sexe = self.sexe.currentText()
         dateNaiss = self.date.date().toPyDate()
         cni = self.cni_Client.text()
+        if(cni ==""):
+            msg = QMessageBox()
+            msg.setWindowTitle("Echec")
+            msg.setText("Veuiller Remplir le champ cni svp")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+
         profession = self.prof.text()
         tel = self.cont.text()
         email = self.mail.text()
         assurance = self.sexe_3.currentText()
         lien ="c://zerzerzerzer"
-        if(i<10):
-            id_patient = "STP20-0{}02".format(i)
-        else:
-            id_patient = "STP20-{}20".format(i)
+        id_patient = "STP20-{}20".format(cni)
         element = (id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien)
         conx,cur = connexion()
         try:
