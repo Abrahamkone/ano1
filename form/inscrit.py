@@ -16,7 +16,6 @@ class Ui_Inscrit(object):
 
     def save_handler(self):
         from Database import connexion
-        global i
         nom = self.nomClient.text()
         prenom = self.prenomClient.text()
         sexe = self.sexe.currentText()
@@ -223,7 +222,7 @@ class Ui_Inscrit(object):
         self.ui = Ui_Accueil()
         self.ui.setupUi(self.Accueil)
         self.Accueil.show()
-        Inscrit.hide()
+        # Inscrit.hide()
 
     def retranslateUi(self, Inscrit):
         _translate = QtCore.QCoreApplication.translate
