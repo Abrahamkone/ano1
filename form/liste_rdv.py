@@ -14,9 +14,8 @@ class Ui_liste_rdv(object):
 
     def loadData(self):
         from saisie_Id_rdv import ident
-        conx = sqlite3.connect('../config/santeplus.db')
-        #where id_patient="{}" """.format(ident)
-        cur = conx.cursor()
+        from Database import connexion
+        conx, cur = connexion()
         try:
             cur.execute("""SELECT * FROM rdv where id_patient="{}" """.format(ident))
             print("SQL -->ok")
@@ -65,7 +64,7 @@ class Ui_liste_rdv(object):
 
     def retranslateUi(self, liste_rdv):
         _translate = QtCore.QCoreApplication.translate
-        liste_rdv.setWindowTitle(_translate("liste_rdv", "Liste des patients"))
+        liste_rdv.setWindowTitle(_translate("liste_rdv", "Liste des RDV du patient"))
         item = self.liste_rdv_2.horizontalHeaderItem(0)
         item.setText(_translate("liste_rdv", "id"))
         item = self.liste_rdv_2.horizontalHeaderItem(1)

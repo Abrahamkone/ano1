@@ -7,8 +7,74 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from Database import connexion
 
 class Ui_Modif(object):
+
+    def select_info(self):
+        """Pour recuperer les info depuis la base de donnée"""
+        from accueil import id_p
+        print("idp dans modif =",id_p)
+        conx, cur = connexion()
+        try:
+            cur.execute("""SELECT nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance FROM patient WHERE id_patient = "{}" """.format(id_p))
+            print("SQL SELECTION TABLE patient --> ok")
+        except Exception as e:
+            print("ERREUR SELECTION TABLE patient : ",e)
+        res = cur.fetchall()
+        conx.close()
+        info = list()
+        for data in res:
+            info.append(data)
+        return info
+
+    def set_info(self):
+        # ndate = self.QtWidgets.QDate()
+        data = self.select_info()
+        print("len = ",len(data))
+        self.nomClient.setText(data[0][0])
+        self.prenomClient.setText(data[0][1])
+        self.sexe.setItemText(0,data[0][2])
+        # self.date.setText(data[0][3])
+        self.cni_Client.setText(data[0][4])
+        self.prof.setText(data[0][5])
+        self.cont.setText(data[0][6])
+        self.mail.setText(data[0][7])
+        self.sexe_3.setItemText(0,data[0][8])
+
+    def update_info(self):
+        nom = self.nomClient.text()
+        prenom = self.prenomClient.text()
+        sexe = self.sexe.currentText()
+        dateNaiss = self.date.date().toPyDate()
+        cni = self.cni_Client.text()
+        profession = self.prof.text()
+        tel = self.cont.text()
+        email = self.mail.text()
+        assurance = self.sexe_3.currentText()
+        lien ="c://zerzerzerzer"
+        id_patient = "{}{}{}".format(nom[0].upper(),prenom[0].upper(),tel[0:3])
+        element = (nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien,id_patient)
+        conx, cur = connexion()
+        try:
+            cur.executemany("""UPDATE patient SET nom= ?, prenom= ?, sexe= ?, dateNaiss= ?, cni= ?, profession= ?, tel= ?, email= ?, assurance= ?, lien_photo= ? WHERE id_patient=?""",element)
+            print("SQL --> ok")
+            conx.commit()
+            msg = QMessageBox()
+            msg.setWindowTitle("Succes")
+            msg.setText("Enregistrement effectué avec succes")
+            msg.exec_()
+        except Exception as e:
+            print('Error : ',e)
+            print('SQL --> fail')
+            msg = QMessageBox()
+            msg.setWindowTitle("Echec")
+            msg.setText("Echec de connexion")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+        conx.close()
+
+
     def setupUi(self, Modif):
         Modif.setObjectName("Modif")
         Modif.resize(800, 600)
@@ -174,6 +240,8 @@ class Ui_Modif(object):
 
         self.retranslateUi(Modif)
         QtCore.QMetaObject.connectSlotsByName(Modif)
+        #pour afficher les infos
+        self.set_info()
 
     def retranslateUi(self, Modif):
         _translate = QtCore.QCoreApplication.translate
@@ -213,4 +281,3 @@ if __name__ == "__main__":
     ui.setupUi(Modif)
     Modif.show()
     sys.exit(app.exec_())
-

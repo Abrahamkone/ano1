@@ -45,6 +45,20 @@ class Ui_Accueil(object):
         self.ui.setupUi(self.Window)
         self.Window.show()
 
+    def open_liste_patient(self):
+        from liste import Ui_liste
+        self.Window = QtWidgets.QMainWindow()
+        self.ui = Ui_liste()
+        self.ui.setupUi(self.Window)
+        self.Window.show()
+
+    def open_liste_rdv_aff(self):
+        from liste_rdv_aff import Ui_liste
+        self.Window = QtWidgets.QMainWindow()
+        self.ui = Ui_liste()
+        self.ui.setupUi(self.Window)
+        self.Window.show()
+
     def btn_modifier(self):
         global id_p
         from modif import Ui_Modif
@@ -330,15 +344,23 @@ class Ui_Accueil(object):
         self.boutton_Inscription.setGeometry(QtCore.QRect(30, 150, 171, 71))
         self.boutton_Inscription.setObjectName("boutton_Inscription")
         Accueil.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Accueil)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setObjectName("menubar")
+        self.menuOptions = QtWidgets.QMenu(self.menubar)
+        self.menuOptions.setObjectName("menuOptions")
+        Accueil.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Accueil)
         self.statusbar.setObjectName("statusbar")
         Accueil.setStatusBar(self.statusbar)
-        self.actionenregistre = QtWidgets.QAction(Accueil)
-        self.actionenregistre.setObjectName("actionenregistre")
-        self.actionquitter = QtWidgets.QAction(Accueil)
-        self.actionquitter.setObjectName("actionquitter")
-        self.actionouvrire = QtWidgets.QAction(Accueil)
-        self.actionouvrire.setObjectName("actionouvrire")
+        self.actionListe_des_Patients = QtWidgets.QAction(Accueil)
+        self.actionListe_des_Patients.setObjectName("actionListe_des_Patients")
+        self.actionListe_des_RDV = QtWidgets.QAction(Accueil)
+        self.actionListe_des_RDV.setObjectName("actionListe_des_RDV")
+        self.menuOptions.addAction(self.actionListe_des_Patients)
+        self.menuOptions.addAction(self.actionListe_des_RDV)
+        self.menubar.addAction(self.menuOptions.menuAction())
+
 
         self.retranslateUi(Accueil)
         QtCore.QMetaObject.connectSlotsByName(Accueil)
@@ -358,6 +380,9 @@ class Ui_Accueil(object):
 
         # pour Supprimer
         self.boutton_Supprimer_fiche.clicked.connect(self.delete_info)
+
+        self.actionListe_des_Patients.triggered.connect(self.open_liste_patient)
+        self.actionListe_des_RDV.triggered.connect(self.open_liste_rdv_aff)
 
 
 
@@ -388,11 +413,9 @@ class Ui_Accueil(object):
         self.boutton_Supprimer_fiche.setText(
             _translate("Accueil", "Supprimer"))
         self.boutton_Inscription.setText(_translate("Accueil", "Inscription"))
-        self.actionenregistre.setText(_translate("Accueil", "enregistre"))
-        self.actionenregistre.setShortcut(_translate("Accueil", "Ctrl+S"))
-        self.actionquitter.setText(_translate("Accueil", "quitter"))
-        self.actionouvrire.setText(_translate("Accueil", "ouvrire"))
-        self.actionouvrire.setShortcut(_translate("Accueil", "Ctrl+O"))
+        self.menuOptions.setTitle(_translate("Accueil", "options"))
+        self.actionListe_des_Patients.setText(_translate("Accueil", "Liste des Patients"))
+        self.actionListe_des_RDV.setText(_translate("Accueil", "Liste des RDV"))
 
 id_p = "none"
 
