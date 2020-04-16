@@ -29,12 +29,13 @@ class Ui_FicheMed(object):
         self.ui = Ui_ordonnace()
         self.ui.setupUi(self.Window)
         self.Window.show()
+
     def select_value(self):
         from saisie_Id import identify
+        from Database import connexion
         global nom, prenom
         print("value id = ",identify)
-        conx = sqlite3.connect('../config/santeplus.db')
-        cur = conx.cursor()
+        conx,cur = connexion()
         try:
             cur.execute("""SELECT nom,prenom FROM patient WHERE id_patient ="{}" """.format(identify))
             print("SQL SELECT TABLE patient --> ok")
@@ -49,6 +50,7 @@ class Ui_FicheMed(object):
 
     def insert_handler(self):
         from saisie_Id import identify
+        from Database import connexion
         global nm
         date = d[0]
         heure = d[1]
@@ -63,8 +65,7 @@ class Ui_FicheMed(object):
         nm = nom_med
         element = (date,heure,service,id_patient,allergie,temperature,observation,symptome,nom_med)
         element2 = (id_patient,date,heure,nom_med,service,date_rdv)
-        conx = sqlite3.connect('../config/santeplus.db')
-        cur = conx.cursor()
+        conx,cur = connexion()
         try:
             cur.execute("""INSERT INTO consultation(date_consul,heure,service,id_patient,allergie,temperature,observation,symptome,nom_med) VALUES(?,?,?,?,?,?,?,?,?)""",element)
             conx.commit()

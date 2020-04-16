@@ -9,7 +9,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import sys
-import sqlite3
 from accueil import *
 from login import *
 
@@ -18,6 +17,7 @@ i= 1
 class Ui_Inscrit(object):
 
     def save_handler(self):
+        from Database import connexion
         global i
         nom = self.nomClient.text()
         prenom = self.prenomClient.text()
@@ -34,8 +34,7 @@ class Ui_Inscrit(object):
         else:
             id_patient = "STP20-{}20".format(i)
         element = (id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien)
-        conx = sqlite3.connect('../config/santeplus.db')
-        cur = conx.cursor()
+        conx,cur = connexion()
         try:
             cur.execute("""INSERT INTO patient(id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien_photo) VALUES(?,?,?,?,?,?,?,?,?,?,?)""",element)
             print("SQL --> ok")

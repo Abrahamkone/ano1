@@ -13,11 +13,11 @@ import sqlite3
 
 class Ui_ordonnace(object):
     def insert_ordonnance(self):
+        from Database import connexion
         from saisie_Id import identify
         from ficheMed import Ui_FicheMed,d,nm #d represente la date ne pas effacer
         nom_med = nm
-        conx = sqlite3.connect('../config/santeplus.db')
-        cur = conx.cursor()
+        conx,cur = connexion()
         try:
             cur.execute("""SELECT id_med FROM medecin WHERE nom="{}" """.format(nom_med)) #On recupère l'id du medecin
         except Exception as e:
