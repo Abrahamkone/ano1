@@ -34,7 +34,7 @@ class Ui_liste(object):
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(30, 20, 671, 531))
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(11)
+        self.tableWidget.setColumnCount(10)
         self.tableWidget.setRowCount(5)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -56,8 +56,6 @@ class Ui_liste(object):
         self.tableWidget.setHorizontalHeaderItem(8, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(9, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(10, item)
         liste.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(liste)
         self.statusbar.setObjectName("statusbar")
@@ -90,8 +88,6 @@ class Ui_liste(object):
         item.setText(_translate("liste_rdv", "Email"))
         item = self.tableWidget.horizontalHeaderItem(9)
         item.setText(_translate("liste_rdv", "Assurance"))
-        item = self.tableWidget.horizontalHeaderItem(10)
-        item.setText(_translate("liste_rdv", "Photo"))
 
 
 if __name__ == "__main__":

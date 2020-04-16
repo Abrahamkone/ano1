@@ -25,9 +25,8 @@ class Ui_Inscrit(object):
         tel = self.cont.text()
         email = self.mail.text()
         assurance = self.sexe_3.currentText()
-        lien ="c://zerzerzerzer"
         id_patient = "STP20-{}20".format(cni)
-        element = (id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien)
+        element = (id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance)
         conx, cur = connexion()
         if(cni ==""):
             msg = QMessageBox()
@@ -37,8 +36,8 @@ class Ui_Inscrit(object):
             msg.exec_()
         else:
             try:
-                cur.execute("""INSERT INTO patient(id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien_photo) VALUES(?,?,?,?,?,?,?,?,?,?,?)""",element)
-                print("SQL --> ok")
+                cur.execute("""INSERT INTO patient(id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance) VALUES(?,?,?,?,?,?,?,?,?,?)""",element)
+                print("SQL INSERTION TABLE patient --> ok")
                 conx.commit()
                 msg = QMessageBox()
                 msg.setWindowTitle("Succes")

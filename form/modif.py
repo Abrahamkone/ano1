@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 from Database import connexion
 
 class Ui_Modif(object):
@@ -44,7 +45,7 @@ class Ui_Modif(object):
         self.sexe_3.setItemText(0,data[0][8])
 
     def update_info(self):
-        from accueil import id_p
+        # from accueil import id_p
         nom = self.nomClient.text()
         prenom = self.prenomClient.text()
         sexe = self.sexe.currentText()
@@ -54,21 +55,21 @@ class Ui_Modif(object):
         tel = self.cont.text()
         email = self.mail.text()
         assurance = self.sexe_3.currentText()
-        lien ="c://zerzerzerzer"
-        id_patient = id_p
-        element = (nom,prenom,sexe,profession,tel,email,assurance,lien,id_patient)
+        # id_patient = id_p
+        id_patient = "DA454"
+        element = (nom,prenom,sexe,profession,tel,email,assurance,id_patient)
         conx, cur = connexion()
         try:
-            cur.execute("""UPDATE patient SET nom= ?, prenom= ?, sexe= ?, profession= ?, tel= ?, email= ?, assurance= ?, lien_photo= ? WHERE id_patient=?""",element)
-            print("SQL --> ok")
+            cur.execute("""UPDATE patient SET nom= ?, prenom= ?, sexe= ?, profession= ?, tel= ?, email= ?, assurance= ? WHERE id_patient=?""",element)
+            print("SQL MODIFICATION TABLE patient--> ok")
             conx.commit()
             msg = QMessageBox()
             msg.setWindowTitle("Succes")
-            msg.setText("Enregistrement effectué avec succes")
+            msg.setText("Modification Effectuée avec success")
             msg.exec_()
         except Exception as e:
+            print("SQL MODIFICATION TABLE patient--> fail")
             print('Error : ',e)
-            print('SQL --> fail')
             msg = QMessageBox()
             msg.setWindowTitle("Echec")
             msg.setText("Echec de connexion")
