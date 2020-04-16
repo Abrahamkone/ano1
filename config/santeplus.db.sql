@@ -33,9 +33,11 @@ DROP TABLE IF EXISTS "rdv";
 CREATE TABLE IF NOT EXISTS "rdv" (
 	"id"	INTEGER PRIMARY KEY AUTOINCREMENT,
 	"id_patient"	TEXT,
-	"date"	NUMERIC,
-	"heure"	NUMERIC,
+	"date_consul"	TEXT,
+	"heure_consul"	TEXT,
+	"nom_med"	TEXT,
 	"service"	TEXT,
+	"date_rdv"	TEXT,
 	FOREIGN KEY("id_patient") REFERENCES "patient"("id_patient") ON UPDATE NO ACTION
 );
 DROP TABLE IF EXISTS "connexion";

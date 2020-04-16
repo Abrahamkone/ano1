@@ -13,9 +13,12 @@ import sqlite3
 from accueil import *
 from login import *
 
+i= 1
+
 class Ui_Inscrit(object):
 
     def save_handler(self):
+        global i
         nom = self.nomClient.text()
         prenom = self.prenomClient.text()
         sexe = self.sexe.currentText()
@@ -26,7 +29,10 @@ class Ui_Inscrit(object):
         email = self.mail.text()
         assurance = self.sexe_3.currentText()
         lien ="c://zerzerzerzer"
-        id_patient = "{}{}{}".format(nom[0].upper(),prenom[0].upper(),tel[0:3])
+        if(i<10):
+            id_patient = "STP20-0{}02".format(i)
+        else:
+            id_patient = "STP20-{}20".format(i)
         element = (id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien)
         conx = sqlite3.connect('../config/santeplus.db')
         cur = conx.cursor()
@@ -38,6 +44,7 @@ class Ui_Inscrit(object):
             msg.setWindowTitle("Succes")
             msg.setText("Enregistrement effectué avec succes")
             msg.exec_()
+            i+=1
         except Exception as e:
             print('Error : ',e)
             print('SQL --> fail')

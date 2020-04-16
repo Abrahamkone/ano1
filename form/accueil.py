@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from PyQt5.QtWidgets import QMessageBox
 
+
 class Ui_Accueil(object):
     def overture_de_fenetre_inscrit(self):
         from inscrit import Ui_Inscrit
@@ -44,15 +45,55 @@ class Ui_Accueil(object):
         self.ui.setupUi(self.Window)
         self.Window.show()
 
+    def btn_modifier(self):
+        global id_p
+        from modif import Ui_Modif
+        id_p = self.line_Edit_Modiffier.text()
+        print("id_p = ",id_p)
+        self.Window = QtWidgets.QMainWindow()
+        self.ui = Ui_Modif()
+        self.ui.setupUi(self.Window)
+        self.Window.show()
 
-    def fonctionClickSupprimer(self):
-        buttonReponse = QMessageBox.question(self, 'Attention ! ', 'Voulez vous vraiment Supprimer ?',
-                                             QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        # if buttonReponse == QMessageBox.Yes:
-            # self.line_Edit_Supprimer.clear()
-            # print('Suppression de id : ', line_Edit_Supprimer.text())
-        # else:
-            # print('Suppression Annulée !')
+    def delete_info(self):
+        from Database import connexion
+        num = self.line_Edit_Supprimer.text()
+        conx,cur = connexion()
+
+        try:
+            cur.execute("""SELECT * FROM patient WHERE id_patient="{}" """.format(num))
+        except Exception as e:
+            print("ERREUR SELECTION TABLE patient: ",e)
+
+        res = cur.fetchall()
+        if(len(res)!=0):
+
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setWindowTitle("Alert")
+            msgBox.setText("Voulez vous vraiment supprimer le patient N° {}".format(num))
+            msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            returnValue = msgBox.exec_()
+
+            if returnValue == QMessageBox.Yes:
+                try:
+                    cur.execute("""DELETE FROM patient WHERE id_patient="{}" """.format(num))
+                    conx.commit()
+                    print("SQL SUPPRESSION TABLE patient --> ok")
+                    msg = QMessageBox()
+                    msg.setWindowTitle("Info")
+                    msg.setText("Effacé avec success!!!")
+                    msg.exec_()
+                    conx.close()
+                except Exception as e:
+                    print("ERREUR SUPPRESSION TABLE patient: ",e)
+                    conx.close()
+        else:
+            msg = QMessageBox()
+            msg.setWindowTitle("Alert")
+            msg.setText("Le patient n'existe pas dans la base de donnée!!!")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
 
     def setupUi(self, Accueil):
         Accueil.setObjectName("Accueil")
@@ -316,7 +357,7 @@ class Ui_Accueil(object):
         self.boutton_Modiffierr_fiche.clicked.connect(self.btn_modifier)
 
         # pour Supprimer
-        self.boutton_Supprimer_fiche.clicked.connect(self.fonctionClickSupprimer)
+        self.boutton_Supprimer_fiche.clicked.connect(self.delete_info)
 
 
 
@@ -341,7 +382,7 @@ class Ui_Accueil(object):
         self.boutton_Modiffierr_fiche.setText(
             _translate("Accueil", "Modiffier"))
         self.groupe_Supprimer_Fiche.setTitle(
-            _translate("Accueil", "Supprimer La fiche"))
+            _translate("Accueil", "Supprimer Patient"))
         self.line_Edit_Supprimer.setPlaceholderText(
             _translate("Accueil", "Numero Unique"))
         self.boutton_Supprimer_fiche.setText(
@@ -353,6 +394,7 @@ class Ui_Accueil(object):
         self.actionouvrire.setText(_translate("Accueil", "ouvrire"))
         self.actionouvrire.setShortcut(_translate("Accueil", "Ctrl+O"))
 
+id_p = "none"
 
 if __name__ == "__main__":
     import sys
