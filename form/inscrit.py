@@ -22,13 +22,6 @@ class Ui_Inscrit(object):
         sexe = self.sexe.currentText()
         dateNaiss = self.date.date().toPyDate()
         cni = self.cni_Client.text()
-        if(cni ==""):
-            msg = QMessageBox()
-            msg.setWindowTitle("Echec")
-            msg.setText("Veuiller Remplir le champ cni svp")
-            msg.setIcon(QMessageBox.Critical)
-            msg.exec_()
-
         profession = self.prof.text()
         tel = self.cont.text()
         email = self.mail.text()
@@ -37,23 +30,30 @@ class Ui_Inscrit(object):
         id_patient = "STP20-{}20".format(cni)
         element = (id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien)
         conx,cur = connexion()
-        try:
-            cur.execute("""INSERT INTO patient(id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien_photo) VALUES(?,?,?,?,?,?,?,?,?,?,?)""",element)
-            print("SQL --> ok")
-            conx.commit()
-            msg = QMessageBox()
-            msg.setWindowTitle("Succes")
-            msg.setText("Enregistrement effectué avec succes")
-            msg.exec_()
-        except Exception as e:
-            print('Error : ',e)
-            print('SQL --> fail')
+        if(cni ==""):
             msg = QMessageBox()
             msg.setWindowTitle("Echec")
-            msg.setText("Echec de connexion")
+            msg.setText("Veuiller Remplir le champ cni svp")
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
-        conx.close()
+        else:
+            try:
+                cur.execute("""INSERT INTO patient(id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien_photo) VALUES(?,?,?,?,?,?,?,?,?,?,?)""",element)
+                print("SQL --> ok")
+                conx.commit()
+                msg = QMessageBox()
+                msg.setWindowTitle("Succes")
+                msg.setText("Enregistrement effectué avec succes")
+                msg.exec_()
+            except Exception as e:
+                print('Error : ',e)
+                print('SQL --> fail')
+                msg = QMessageBox()
+                msg.setWindowTitle("Echec")
+                msg.setText("Echec de connexion")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec_()
+            conx.close()
 
     def setupUi(self, Inscrit):
         Inscrit.setObjectName("Inscrit")
