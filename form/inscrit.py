@@ -45,7 +45,6 @@ class Ui_Inscrit(object):
             msg.setWindowTitle("Succes")
             msg.setText("Enregistrement effectué avec succes")
             msg.exec_()
-            i+=1
         except Exception as e:
             print('Error : ',e)
             print('SQL --> fail')
