@@ -1,6 +1,6 @@
 import sqlite3
 def connexion():
-    conn = sqlite3.connect('../config/santeplus.db')
+    conn = sqlite3.connect('C:/Users/DIARRASSOUBA Siaka/Documents/GitHub/ano1/config/santeplus.db')
     cursor = conn.cursor()
     return conn, cursor
 
