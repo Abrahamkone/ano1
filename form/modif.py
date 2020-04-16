@@ -13,11 +13,11 @@ class Ui_Modif(object):
 
     def select_info(self):
         """Pour recuperer les info depuis la base de donnée"""
-        from accueil import id_p
-        print("idp dans modif =",id_p)
+        # from accueil import id_p
+        # print("id_p dans modif =",id_p)
         conx, cur = connexion()
         try:
-            cur.execute("""SELECT nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance FROM patient WHERE id_patient = "{}" """.format(id_p))
+            cur.execute("""SELECT nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance FROM patient WHERE id_patient = "{}" """.format("DA454"))
             print("SQL SELECTION TABLE patient --> ok")
         except Exception as e:
             print("ERREUR SELECTION TABLE patient : ",e)
@@ -37,27 +37,29 @@ class Ui_Modif(object):
         self.sexe.setItemText(0,data[0][2])
         # self.date.setText(data[0][3])
         self.cni_Client.setText(data[0][4])
+        self.cni_Client.setEnabled(False)
         self.prof.setText(data[0][5])
         self.cont.setText(data[0][6])
         self.mail.setText(data[0][7])
         self.sexe_3.setItemText(0,data[0][8])
 
     def update_info(self):
+        from accueil import id_p
         nom = self.nomClient.text()
         prenom = self.prenomClient.text()
         sexe = self.sexe.currentText()
-        dateNaiss = self.date.date().toPyDate()
+        #dateNaiss = self.date.date().toPyDate()
         cni = self.cni_Client.text()
         profession = self.prof.text()
         tel = self.cont.text()
         email = self.mail.text()
         assurance = self.sexe_3.currentText()
         lien ="c://zerzerzerzer"
-        id_patient = "{}{}{}".format(nom[0].upper(),prenom[0].upper(),tel[0:3])
-        element = (nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien,id_patient)
+        id_patient = id_p
+        element = (nom,prenom,sexe,profession,tel,email,assurance,lien,id_patient)
         conx, cur = connexion()
         try:
-            cur.executemany("""UPDATE patient SET nom= ?, prenom= ?, sexe= ?, dateNaiss= ?, cni= ?, profession= ?, tel= ?, email= ?, assurance= ?, lien_photo= ? WHERE id_patient=?""",element)
+            cur.execute("""UPDATE patient SET nom= ?, prenom= ?, sexe= ?, profession= ?, tel= ?, email= ?, assurance= ?, lien_photo= ? WHERE id_patient=?""",element)
             print("SQL --> ok")
             conx.commit()
             msg = QMessageBox()
@@ -73,7 +75,6 @@ class Ui_Modif(object):
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
         conx.close()
-
 
     def setupUi(self, Modif):
         Modif.setObjectName("Modif")
@@ -242,6 +243,8 @@ class Ui_Modif(object):
         QtCore.QMetaObject.connectSlotsByName(Modif)
         #pour afficher les infos
         self.set_info()
+        #pour enregister les modifications
+        self.save.clicked.connect(self.update_info)
 
     def retranslateUi(self, Modif):
         _translate = QtCore.QCoreApplication.translate
@@ -263,7 +266,7 @@ class Ui_Modif(object):
         self.cont.setPlaceholderText(_translate("Modif", "+225"))
         self.label_12.setText(_translate("Modif", "E-mail:"))
         self.ann.setText(_translate("Modif", "ANNULER"))
-        self.save.setText(_translate("Modif", "ENREGISTRER"))
+        self.save.setText(_translate("Modif", "MODIFIER"))
         self.sexe.setItemText(1, _translate("Modif", "HOMME"))
         self.sexe.setItemText(2, _translate("Modif", "FEMME"))
         self.sexe_3.setItemText(1, _translate("Modif", "axa"))

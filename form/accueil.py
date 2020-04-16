@@ -8,12 +8,22 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 from PyQt5.QtWidgets import QMessageBox
 
-id_p = "none"
-
+iden = "none"
 class Ui_Accueil(object):
+
+    def btn_modifier(self):
+        global iden,id_p
+        from modif import Ui_Modif
+        iden = self.line_Edit_Modiffier.text()
+        id_p = iden
+        self.Window = QtWidgets.QMainWindow()
+        self.ui = Ui_Modif()
+        self.ui.setupUi(self.Window)
+        self.Window.show()
+        print("id_p =",iden)
+
     def overture_de_fenetre_inscrit(self):
         from inscrit import Ui_Inscrit
         self.Window = QtWidgets.QMainWindow()
@@ -57,16 +67,6 @@ class Ui_Accueil(object):
         from liste_rdv_aff import Ui_liste
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_liste()
-        self.ui.setupUi(self.Window)
-        self.Window.show()
-
-    def btn_modifier(self):
-        global id_p
-        from modif import Ui_Modif
-        id_p = self.line_Edit_Modiffier.text()
-        print("id_p = ",id_p)
-        self.Window = QtWidgets.QMainWindow()
-        self.ui = Ui_Modif()
         self.ui.setupUi(self.Window)
         self.Window.show()
 
@@ -418,7 +418,6 @@ class Ui_Accueil(object):
         self.actionListe_des_Patients.setText(_translate("Accueil", "Liste des Patients"))
         self.actionListe_des_RDV.setText(_translate("Accueil", "Liste des RDV"))
 
-id_p = "none"
 
 if __name__ == "__main__":
     import sys
