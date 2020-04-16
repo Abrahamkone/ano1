@@ -14,15 +14,14 @@ iden = "none"
 class Ui_Accueil(object):
 
     def btn_modifier(self):
-        global iden,id_p
+        global iden
         from modif import Ui_Modif
-        iden = self.line_Edit_Modiffier.text()
-        id_p = iden
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_Modif()
         self.ui.setupUi(self.Window)
+        iden = self.line_Edit_Modiffier.text()
         self.Window.show()
-        print("id_p =",iden)
+        print("id_p dans la fonction =",iden)
 
     def overture_de_fenetre_inscrit(self):
         from inscrit import Ui_Inscrit
@@ -378,6 +377,7 @@ class Ui_Accueil(object):
         self.actionListe_des_Patients.setText(_translate("Accueil", "Liste des Patients"))
         self.actionListe_des_RDV.setText(_translate("Accueil", "Liste des RDV"))
 
+print("new value ident =",iden)
 
 if __name__ == "__main__":
     import sys

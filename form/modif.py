@@ -14,11 +14,13 @@ class Ui_Modif(object):
 
     def select_info(self):
         """Pour recuperer les info depuis la base de donnée"""
-        # from accueil import id_p
-        # print("id_p dans modif =",id_p)
+        from accueil import iden
+        print("id_p dans modif =",iden)
+        test = iden
+        # test = "DA454"
         conx, cur = connexion()
         try:
-            cur.execute("""SELECT nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance FROM patient WHERE id_patient = "{}" """.format("DA454"))
+            cur.execute("""SELECT nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance FROM patient WHERE id_patient = "{}" """.format(test))
             print("SQL SELECTION TABLE patient --> ok")
         except Exception as e:
             print("ERREUR SELECTION TABLE patient : ",e)
@@ -45,7 +47,7 @@ class Ui_Modif(object):
         self.sexe_3.setItemText(0,data[0][8])
 
     def update_info(self):
-        # from accueil import id_p
+        from accueil import id_p
         nom = self.nomClient.text()
         prenom = self.prenomClient.text()
         sexe = self.sexe.currentText()
@@ -55,8 +57,8 @@ class Ui_Modif(object):
         tel = self.cont.text()
         email = self.mail.text()
         assurance = self.sexe_3.currentText()
-        # id_patient = id_p
-        id_patient = "DA454"
+        id_patient = id_p
+        # id_patient = "DA454"
         element = (nom,prenom,sexe,profession,tel,email,assurance,id_patient)
         conx, cur = connexion()
         try:
