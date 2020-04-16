@@ -375,7 +375,6 @@ class Ui_FicheMed(object):
         self.pushButtonTerminer.setText(_translate("FicheMed", "Terminer la consultation"))
         self.pushButton.setText(_translate("FicheMed", "Retour"))
 
-import img_rc
 
 if __name__ == "__main__":
     import sys

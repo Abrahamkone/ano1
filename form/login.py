@@ -13,7 +13,6 @@ from accueil import Ui_Accueil
 class Ui_Login(object):
     #Pour afficher la fenêtre acceuil
 
-
     def setupUi(self, Login):
         Login.setObjectName("Login")
         Login.resize(628, 553)
@@ -67,10 +66,10 @@ class Ui_Login(object):
 
     #Connection et vérification information comnnection
     def login_handler(self):
+        from Database import connexion
         pseudo = self.username_log.text()
         pwd = self.password.text()
-        conx = sqlite3.connect('../config/santeplus.db')
-        cur = conx.cursor()
+        conx, cur = connexion()
         try:
             cur.execute("""SELECT * FROM connexion""")
         except Exception as e:
