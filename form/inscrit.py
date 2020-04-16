@@ -29,7 +29,7 @@ class Ui_Inscrit(object):
         lien ="c://zerzerzerzer"
         id_patient = "STP20-{}20".format(cni)
         element = (id_patient,nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance,lien)
-        conx,cur = connexion()
+        conx, cur = connexion()
         if(cni ==""):
             msg = QMessageBox()
             msg.setWindowTitle("Echec")
@@ -73,13 +73,8 @@ class Ui_Inscrit(object):
 "background-color: rgb(188, 188, 188);\n"
 "}")
         self.groupBox.setObjectName("groupBox")
-        self.photo = QtWidgets.QLabel(self.groupBox)
-        self.photo.setGeometry(QtCore.QRect(540, 10, 101, 101))
-        self.photo.setStyleSheet("\n"
-"background-color: rgb(203, 203, 203);")
-        self.photo.setObjectName("photo")
         self.prenomClient = QtWidgets.QLineEdit(self.groupBox)
-        self.prenomClient.setGeometry(QtCore.QRect(410, 180, 141, 21))
+        self.prenomClient.setGeometry(QtCore.QRect(410, 140, 141, 21))
         self.prenomClient.setStyleSheet("border-color:black;\n"
 "border-radius:10px;\n"
 "border-style:solid;\n"
@@ -87,16 +82,16 @@ class Ui_Inscrit(object):
 "")
         self.prenomClient.setObjectName("prenomClient")
         self.label_3 = QtWidgets.QLabel(self.groupBox)
-        self.label_3.setGeometry(QtCore.QRect(10, 180, 31, 16))
+        self.label_3.setGeometry(QtCore.QRect(10, 140, 31, 16))
         self.label_3.setObjectName("label_3")
         self.label_7 = QtWidgets.QLabel(self.groupBox)
-        self.label_7.setGeometry(QtCore.QRect(340, 230, 31, 16))
+        self.label_7.setGeometry(QtCore.QRect(340, 210, 31, 16))
         self.label_7.setObjectName("label_7")
         self.label_4 = QtWidgets.QLabel(self.groupBox)
-        self.label_4.setGeometry(QtCore.QRect(330, 180, 47, 13))
+        self.label_4.setGeometry(QtCore.QRect(330, 140, 47, 13))
         self.label_4.setObjectName("label_4")
         self.nomClient = QtWidgets.QLineEdit(self.groupBox)
-        self.nomClient.setGeometry(QtCore.QRect(120, 180, 131, 21))
+        self.nomClient.setGeometry(QtCore.QRect(120, 140, 131, 21))
         self.nomClient.setStyleSheet("border-color:black;\n"
 "border-radius:10px;\n"
 "border-style:solid;\n"
@@ -104,12 +99,6 @@ class Ui_Inscrit(object):
 "")
         self.nomClient.setText("")
         self.nomClient.setObjectName("nomClient")
-        self.tool = QtWidgets.QToolButton(self.groupBox)
-        self.tool.setGeometry(QtCore.QRect(620, 120, 25, 19))
-        self.tool.setObjectName("tool")
-        self.label_13 = QtWidgets.QLabel(self.groupBox)
-        self.label_13.setGeometry(QtCore.QRect(560, 120, 61, 16))
-        self.label_13.setObjectName("label_13")
         self.label_5 = QtWidgets.QLabel(self.groupBox)
         self.label_5.setGeometry(QtCore.QRect(310, 270, 91, 16))
         self.label_5.setObjectName("label_5")
@@ -118,7 +107,7 @@ class Ui_Inscrit(object):
         self.date.setCalendarPopup(True)
         self.date.setObjectName("date")
         self.prof = QtWidgets.QLineEdit(self.groupBox)
-        self.prof.setGeometry(QtCore.QRect(120, 220, 131, 21))
+        self.prof.setGeometry(QtCore.QRect(120, 210, 131, 21))
         self.prof.setStyleSheet("border-color:black;\n"
 "border-radius:10px;\n"
 "border-style:solid;\n"
@@ -126,10 +115,10 @@ class Ui_Inscrit(object):
 "")
         self.prof.setObjectName("prof")
         self.label_10 = QtWidgets.QLabel(self.groupBox)
-        self.label_10.setGeometry(QtCore.QRect(10, 280, 61, 16))
+        self.label_10.setGeometry(QtCore.QRect(10, 270, 61, 16))
         self.label_10.setObjectName("label_10")
         self.nation = QtWidgets.QLineEdit(self.groupBox)
-        self.nation.setGeometry(QtCore.QRect(120, 280, 131, 21))
+        self.nation.setGeometry(QtCore.QRect(120, 270, 131, 21))
         self.nation.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.nation.setStyleSheet("border-color:black;\n"
 "border-radius:10px;\n"
@@ -138,13 +127,13 @@ class Ui_Inscrit(object):
 "")
         self.nation.setObjectName("nation")
         self.label_9 = QtWidgets.QLabel(self.groupBox)
-        self.label_9.setGeometry(QtCore.QRect(10, 220, 61, 16))
+        self.label_9.setGeometry(QtCore.QRect(10, 210, 61, 16))
         self.label_9.setObjectName("label_9")
         self.label_8 = QtWidgets.QLabel(self.groupBox)
         self.label_8.setGeometry(QtCore.QRect(10, 330, 47, 13))
         self.label_8.setObjectName("label_8")
         self.cni_Client = QtWidgets.QLineEdit(self.groupBox)
-        self.cni_Client.setGeometry(QtCore.QRect(420, 310, 131, 21))
+        self.cni_Client.setGeometry(QtCore.QRect(420, 320, 131, 21))
         self.cni_Client.setStyleSheet("border-color:black;\n"
 "border-radius:10px;\n"
 "border-style:solid;\n"
@@ -152,7 +141,7 @@ class Ui_Inscrit(object):
 "")
         self.cni_Client.setObjectName("cni_Client")
         self.label_11 = QtWidgets.QLabel(self.groupBox)
-        self.label_11.setGeometry(QtCore.QRect(310, 310, 71, 16))
+        self.label_11.setGeometry(QtCore.QRect(310, 320, 71, 16))
         self.label_11.setObjectName("label_11")
         self.cont = QtWidgets.QLineEdit(self.groupBox)
         self.cont.setGeometry(QtCore.QRect(120, 320, 141, 21))
@@ -163,7 +152,7 @@ class Ui_Inscrit(object):
 "")
         self.cont.setObjectName("cont")
         self.mail = QtWidgets.QLineEdit(self.groupBox)
-        self.mail.setGeometry(QtCore.QRect(120, 360, 131, 21))
+        self.mail.setGeometry(QtCore.QRect(120, 380, 131, 21))
         self.mail.setStyleSheet("border-color:black;\n"
 "border-radius:10px;\n"
 "border-style:solid;\n"
@@ -171,7 +160,7 @@ class Ui_Inscrit(object):
 "")
         self.mail.setObjectName("mail")
         self.label_12 = QtWidgets.QLabel(self.groupBox)
-        self.label_12.setGeometry(QtCore.QRect(30, 370, 41, 16))
+        self.label_12.setGeometry(QtCore.QRect(30, 390, 41, 16))
         self.label_12.setObjectName("label_12")
         self.ann = QtWidgets.QPushButton(self.groupBox)
         self.ann.setGeometry(QtCore.QRect(190, 450, 81, 23))
@@ -185,7 +174,7 @@ class Ui_Inscrit(object):
         self.save.setGeometry(QtCore.QRect(370, 450, 91, 23))
         self.save.setObjectName("save")
         self.sexe = QtWidgets.QComboBox(self.groupBox)
-        self.sexe.setGeometry(QtCore.QRect(420, 230, 131, 22))
+        self.sexe.setGeometry(QtCore.QRect(420, 210, 131, 22))
         self.sexe.setStyleSheet("border-color:black;\n"
 "border-radius:10px;\n"
 "border-style:solid;\n"
@@ -197,7 +186,7 @@ class Ui_Inscrit(object):
         self.sexe.addItem("")
         self.sexe.addItem("")
         self.sexe_3 = QtWidgets.QComboBox(self.groupBox)
-        self.sexe_3.setGeometry(QtCore.QRect(430, 370, 131, 22))
+        self.sexe_3.setGeometry(QtCore.QRect(430, 380, 131, 22))
         self.sexe_3.setStyleSheet("border-color:black;\n"
 "border-radius:10px;\n"
 "border-style:solid;\n"
@@ -211,7 +200,7 @@ class Ui_Inscrit(object):
         self.sexe_3.addItem("")
         self.sexe_3.addItem("")
         self.label = QtWidgets.QLabel(self.groupBox)
-        self.label.setGeometry(QtCore.QRect(340, 370, 61, 16))
+        self.label.setGeometry(QtCore.QRect(340, 380, 61, 16))
         self.label.setObjectName("label")
         self.label_15 = QtWidgets.QLabel(self.centralwidget)
         self.label_15.setGeometry(QtCore.QRect(60, 10, 121, 31))
@@ -225,6 +214,7 @@ class Ui_Inscrit(object):
 
         self.retranslateUi(Inscrit)
         QtCore.QMetaObject.connectSlotsByName(Inscrit)
+
         self.save.clicked.connect(self.save_handler)
         self.ann.clicked.connect(self.annuler_btn)
 
@@ -239,12 +229,9 @@ class Ui_Inscrit(object):
         _translate = QtCore.QCoreApplication.translate
         Inscrit.setWindowTitle(_translate("Inscrit", "MainWindow"))
         self.groupBox.setTitle(_translate("Inscrit", "OUVERTURE DE COMPTE"))
-        self.photo.setText(_translate("Inscrit", "<html><head/><body><p align=\"center\">photo</p></body></html>"))
         self.label_3.setText(_translate("Inscrit", "Nom:"))
         self.label_7.setText(_translate("Inscrit", "Sexe:"))
         self.label_4.setText(_translate("Inscrit", "Prénom:"))
-        self.tool.setText(_translate("Inscrit", "..."))
-        self.label_13.setText(_translate("Inscrit", "<html><head/><body><p><span style=\" font-weight:600;\">Parcourir:</span></p></body></html>"))
         self.label_5.setText(_translate("Inscrit", "Date de naissance:"))
         self.label_10.setText(_translate("Inscrit", "Nationalité:"))
         self.nation.setPlaceholderText(_translate("Inscrit", "ivoirienne"))
