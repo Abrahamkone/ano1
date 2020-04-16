@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>656</width>
-    <height>236</height>
+    <height>538</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,12 +17,23 @@
    <widget class="QTableWidget" name="liste_rdv_2">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>20</y>
-      <width>491</width>
-      <height>181</height>
+      <x>50</x>
+      <y>10</y>
+      <width>521</width>
+      <height>301</height>
      </rect>
     </property>
+    <property name="rowCount">
+     <number>5</number>
+    </property>
+    <property name="columnCount">
+     <number>5</number>
+    </property>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
     <column>
      <property name="text">
       <string>Date de consultation</string>
@@ -43,6 +54,20 @@
       <string>Date de rendez-vous</string>
      </property>
     </column>
+    <column/>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
