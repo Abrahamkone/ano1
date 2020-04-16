@@ -10,17 +10,20 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
+
 iden = "none"
 class Ui_Accueil(object):
 
     def btn_modifier(self):
-        global iden
         from modif import Ui_Modif
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_Modif()
         self.ui.setupUi(self.Window)
-        iden = self.line_Edit_Modiffier.text()
         self.Window.show()
+
+    def send_iden(self):
+        global iden
+        iden = self.line_Edit_Modiffier.text()
         print("id_p dans la fonction =",iden)
 
     def overture_de_fenetre_inscrit(self):
@@ -343,6 +346,7 @@ class Ui_Accueil(object):
         self.pushButton_2.clicked.connect(self.overture_de_fenetre_saisie_id_rdv)
 
         #pour Modiffier
+        self.boutton_Modiffierr_fiche.clicked.connect(self.send_iden)
         self.boutton_Modiffierr_fiche.clicked.connect(self.btn_modifier)
 
         # pour Supprimer
