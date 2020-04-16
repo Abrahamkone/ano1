@@ -19,7 +19,7 @@ class Ui_Inscrit(object):
         nom = self.nomClient.text()
         prenom = self.prenomClient.text()
         sexe = self.sexe.currentText()
-        dateNaiss = "14/04/2020"
+        dateNaiss = self.date.date().toPyDate()
         cni = self.cni_Client.text()
         profession = self.prof.text()
         tel = self.cont.text()
@@ -47,16 +47,6 @@ class Ui_Inscrit(object):
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
         conx.close()
-        # if(res):
-        #     print("ok")
-        #     msg = QMessageBox()
-        #     msg.setWindowTitle("Succes")
-        #     msg.setText("Enregistrement effectué avec succes")
-        # else:
-        #     print('fail')
-        #     msg = QMessageBox()
-        #     msg.setWindowTitle("Echec")
-        #     msg.setText("Echec de connexion")
 
     def setupUi(self, Inscrit):
         Inscrit.setObjectName("Inscrit")

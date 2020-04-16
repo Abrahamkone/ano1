@@ -40,11 +40,8 @@ class Ui_Accueil(object):
     def overture_de_fenetre_saisie_id_rdv(self):
         from saisie_Id_rdv import Ui_SaisieId_rdv
         self.Window = QtWidgets.QMainWindow()
-        #Ui_saisieId varie selon la fenetre qu'on veut afficher
         self.ui = Ui_SaisieId_rdv()
         self.ui.setupUi(self.Window)
-        #juste pour faire disparaitre la fenetre courante
-        #devine(:
         self.Window.show()
 
 
@@ -306,15 +303,22 @@ class Ui_Accueil(object):
         QtCore.QMetaObject.connectSlotsByName(Accueil)
         Accueil.setTabOrder(self.pushButton, self.pushButton_2)
 
-        #le boutton a pour nom : pushbutton et la metode overture_de_fenetre_consul est define en haut
-        # son role : au clic, une connexion est faite avec la methode qui s'execute
-        self.pushButton.clicked.connect(self.overture_de_fenetre_saisie_id)
-        # le nom du bouton : pushButton_2  = ouvre la fenetre saisie de id (:
-        self.pushButton_2.clicked.connect(self.overture_de_fenetre_saisie_id_rdv)
+        #pour Inscription
         self.boutton_Inscription.clicked.connect(self.overture_de_fenetre_inscrit)
+
+        #pour Consultation
+        self.pushButton.clicked.connect(self.overture_de_fenetre_saisie_id)
+
+        #pour Rendez vous
+        self.pushButton_2.clicked.connect(self.overture_de_fenetre_saisie_id_rdv)
+
+        #pour Modiffier
+        self.boutton_Modiffierr_fiche.clicked.connect(self.btn_modifier)
 
         # pour Supprimer
         self.boutton_Supprimer_fiche.clicked.connect(self.fonctionClickSupprimer)
+
+
 
     def retranslateUi(self, Accueil):
         _translate = QtCore.QCoreApplication.translate

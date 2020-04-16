@@ -49,8 +49,10 @@ class Ui_FicheMed(object):
 
     def insert_handler(self):
         from saisie_Id import identify
+        global nm
         date = d[0]
         heure = d[1]
+        date_rdv = self.dateRDVDateEdit.date().toPyDate()
         service = self.serviceComboBox.currentText()
         id_patient = identify
         allergie = self.allergieComboBox.currentText()
@@ -58,13 +60,26 @@ class Ui_FicheMed(object):
         observation = self.textEdit_Observation.toPlainText()
         symptome = self.lineEdit_Symptome.text()
         nom_med = self.comboBox_medTrait.currentText()
+        nm = nom_med
         element = (date,heure,service,id_patient,allergie,temperature,observation,symptome,nom_med)
+        element2 = (id_patient,date,heure,nom_med,service,date_rdv)
         conx = sqlite3.connect('../config/santeplus.db')
         cur = conx.cursor()
         try:
             cur.execute("""INSERT INTO consultation(date_consul,heure,service,id_patient,allergie,temperature,observation,symptome,nom_med) VALUES(?,?,?,?,?,?,?,?,?)""",element)
-            print("SQL INSERTION TABLE consultation --> ok")
             conx.commit()
+            print("SQL INSERTION TABLE consultation --> ok")
+            if (date_rdv == "2000-01-01"):
+                conx.close()
+            else:
+                try:
+                    cur.execute("""INSERT INTO rdv(id_patient,date_consul,heure_consul,nom_med,service,date_rdv) VALUES(?,?,?,?,?,?)""",element2)
+                    conx.commit()
+                    print("SQL INSERTION TABLE rdv --> ok")
+                    print(date_rdv)
+                except Exception as e:
+                    print('Error in rdv : ',e)
+                    print('SQL --> fail')
             msg = QMessageBox()
             msg.setWindowTitle("Succes")
             msg.setText("Enregistrement effectué avec succes")
@@ -97,7 +112,9 @@ class Ui_FicheMed(object):
         font.setWeight(75)
         self.label_3.setFont(font)
         self.label_3.setWhatsThis("")
-        self.label_3.setStyleSheet("border-style:solid;\n""border-width:2px;\n""border-color:black;")
+        self.label_3.setStyleSheet("border-style:solid;\n"
+"border-width:2px;\n"
+"border-color:black;")
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(FicheMed)
         self.label_4.setGeometry(QtCore.QRect(770, 0, 141, 111))
@@ -180,10 +197,12 @@ class Ui_FicheMed(object):
         self.groupBox_3.setGeometry(QtCore.QRect(450, 20, 321, 161))
         self.groupBox_3.setObjectName("groupBox_3")
         self.formLayoutWidget_2 = QtWidgets.QWidget(self.groupBox_3)
-        self.formLayoutWidget_2.setGeometry(QtCore.QRect(10, 20, 301, 121))
+        self.formLayoutWidget_2.setGeometry(QtCore.QRect(10, 20, 301, 138))
         self.formLayoutWidget_2.setObjectName("formLayoutWidget_2")
         self.formLayout_2 = QtWidgets.QFormLayout(self.formLayoutWidget_2)
-        self.formLayout_2.setContentsMargins(0, 13, 0, 0)
+        self.formLayout_2.setContentsMargins(0, 3, 0, 0)
+        self.formLayout_2.setHorizontalSpacing(2)
+        self.formLayout_2.setVerticalSpacing(8)
         self.formLayout_2.setObjectName("formLayout_2")
         self.allergieLabel = QtWidgets.QLabel(self.formLayoutWidget_2)
         font = QtGui.QFont()
@@ -243,6 +262,13 @@ class Ui_FicheMed(object):
         self.comboBox_medTrait.addItem("")
         self.comboBox_medTrait.addItem("")
         self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.comboBox_medTrait)
+        self.dateRDVLabel = QtWidgets.QLabel(self.formLayoutWidget_2)
+        self.dateRDVLabel.setObjectName("dateRDVLabel")
+        self.formLayout_2.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.dateRDVLabel)
+        self.dateRDVDateEdit = QtWidgets.QDateEdit(self.formLayoutWidget_2)
+        self.dateRDVDateEdit.setObjectName("dateRDVDateEdit")
+        self.dateRDVDateEdit.setCalendarPopup(True)
+        self.formLayout_2.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.dateRDVDateEdit)
         self.groupBox_4 = QtWidgets.QGroupBox(self.groupBox)
         self.groupBox_4.setGeometry(QtCore.QRect(20, 200, 421, 221))
         self.groupBox_4.setObjectName("groupBox_4")
@@ -311,9 +337,10 @@ class Ui_FicheMed(object):
 
         self.commandLinkButtonOrdonance.clicked.connect(self.overture_de_fenetre_ordonnance)
 
+
     def retranslateUi(self, FicheMed):
         _translate = QtCore.QCoreApplication.translate
-        FicheMed.setWindowTitle(_translate("FicheMed", "FicheMed"))
+        FicheMed.setWindowTitle(_translate("FicheMed", "Dialog"))
         self.label_3.setText(_translate("FicheMed", "<html><head/><body><p align=\"center\"><span style=\" text-decoration: underline; color:#aaff00;\">FICHE MEDICALE</span></p></body></html>"))
         self.groupBox.setTitle(_translate("FicheMed", "Consultation"))
         self.groupBox_2.setTitle(_translate("FicheMed", "Information sur le patient"))
@@ -327,6 +354,7 @@ class Ui_FicheMed(object):
         self.tempRatureLabel.setText(_translate("FicheMed", "Température:"))
         self.mDecinTraitantLabel.setText(_translate("FicheMed", "Médecin Traitant :"))
         self.serviceLabel.setText(_translate("FicheMed", "Service :"))
+        self.dateRDVLabel.setText(_translate("FicheMed", "<html><head/><body><p><span style=\" font-size:10pt; text-decoration: underline;\">Date RDV:</span></p></body></html>"))
         self.allergieComboBox.setItemText(1, _translate("FicheMed", "CHLOROQUINE"))
         self.allergieComboBox.setItemText(2, _translate("FicheMed", "FRUITS"))
         self.allergieComboBox.setItemText(3, _translate("FicheMed", "NOISETTES"))
@@ -342,8 +370,7 @@ class Ui_FicheMed(object):
         self.groupBox_4.setTitle(_translate("FicheMed", "Observations"))
         self.groupBox_5.setTitle(_translate("FicheMed", "Diagnostic"))
         self.label_2.setText(_translate("FicheMed", "Symptôme:"))
-        self.commandLinkButtonOrdonance.setText(
-            _translate("FicheMed", "Prescrire une ordonance médicale"))
+        self.commandLinkButtonOrdonance.setText(_translate("FicheMed", "Prescrire une ordonance médicale"))
         self.pushButtonTerminer.setText(_translate("FicheMed", "Terminer la consultation"))
         self.pushButton.setText(_translate("FicheMed", "Retour"))
 
@@ -352,7 +379,7 @@ import img_rc
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    FicheMed = QtWidgets.QMainWindow()
+    FicheMed = QtWidgets.QDialog()
     ui = Ui_FicheMed()
     ui.setupUi(FicheMed)
     FicheMed.show()

@@ -11,34 +11,41 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import sqlite3
 
-
+ident = "none"
 class Ui_SaisieId_rdv(object):
 
-    def verify_handler(self):
-        global identify
+    def verify_rdv(self):
+        global ident
         id_patient_rdv = self.id_Patient_rdv.text()
-        conx = sqlite3.connect('C:/Users/DIARRASSOUBA Siaka/Documents/GitHub/ano1/config/santeplus.db')
+        conx = sqlite3.connect('../config/santeplus.db')
         cur = conx.cursor()
         try:
-            cur.execute("""SELECT * FROM patient WHERE id_patient ="{}" """.format(id_patient_rdv))
+            cur.execute("""SELECT * FROM rdv WHERE id_patient ="{}" """.format(id_patient_rdv))
             print("SQL --> ok")
         except Exception as e:
             print("error: ",e)
             print("SQL --> fail")
         res= cur.fetchall()
         if len(res)!=0:
-            identify= res[0][0]
-            print("id =",identify)
-            self.open_ficheMed()
+            ident= res[0][1]
+            print("ident =",ident)
+            self.open_liste_rdv()
         else:
-            print("id =",identify)
+            print("ident =",ident)
             msg = QMessageBox()
             msg.setWindowTitle("Echec")
-            msg.setText("Vous n'êtes pas inscrit")
+            msg.setText("Vous n'avez pas de RDV")
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
+        print("ident=",ident)
+        conx.close()
 
-
+    def open_liste_rdv(self):
+        from liste_rdv import Ui_liste_rdv
+        self.Window = QtWidgets.QMainWindow()
+        self.ui = Ui_liste_rdv()
+        self.ui.setupUi(self.Window)
+        self.Window.show()
 
     def setupUi(self, SaisieId_rdv):
         SaisieId_rdv.setObjectName("SaisieId_rdv")
@@ -82,6 +89,7 @@ class Ui_SaisieId_rdv(object):
 
         self.retranslateUi(SaisieId_rdv)
         QtCore.QMetaObject.connectSlotsByName(SaisieId_rdv)
+        self.boutton_Valider_Id_rdv.clicked.connect(self.verify_rdv)
 
     def retranslateUi(self, SaisieId_rdv):
         _translate = QtCore.QCoreApplication.translate
