@@ -23,9 +23,9 @@ class Ui_SaisieId(object):
 
     def verify_handler(self):
         global identify
+        from Database import connexion
         id_patient = self.id_Patient.text()
-        conx = sqlite3.connect('../config/santeplus.db')
-        cur = conx.cursor()
+        conx, cur = connexion()
         try:
             cur.execute("""SELECT * FROM patient WHERE id_patient ="{}" """.format(id_patient))
             print("SQL --> ok")

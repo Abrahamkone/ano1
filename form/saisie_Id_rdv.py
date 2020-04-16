@@ -16,9 +16,9 @@ class Ui_SaisieId_rdv(object):
 
     def verify_rdv(self):
         global ident
+        from Database import connexion
         id_patient_rdv = self.id_Patient_rdv.text()
-        conx = sqlite3.connect('../config/santeplus.db')
-        cur = conx.cursor()
+        conx, cur = connexion()
         try:
             cur.execute("""SELECT * FROM rdv WHERE id_patient ="{}" """.format(id_patient_rdv))
             print("SQL --> ok")
