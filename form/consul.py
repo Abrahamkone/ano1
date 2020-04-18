@@ -9,14 +9,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from inscrit import Ui_Inscrit
 
+
 class Ui_Consultation(object):
-    
+
     def overture_de_fenetre_inscription(self):
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_Inscrit()
         self.ui.setupUi(self.Window)
         self.Window.show()
-
 
     def setupUi(self, Consultation):
         Consultation.setObjectName("Consultation")
@@ -56,8 +56,6 @@ class Ui_Consultation(object):
         # pushButton les gars nom des variables la c'est pas tro sa hin
         self.pushButton.clicked.connect(self.overture_de_fenetre_inscription)
 
-
-
     def retranslateUi(self, Consultation):
         _translate = QtCore.QCoreApplication.translate
         Consultation.setWindowTitle(_translate("Consultation", "MainWindow"))
@@ -75,4 +73,3 @@ if __name__ == "__main__":
     ui.setupUi(Consultation)
     Consultation.show()
     sys.exit(app.exec_())
-

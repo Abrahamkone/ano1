@@ -9,60 +9,69 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 from Database import connexion
-from accueil import iden
+
 
 class Ui_Modif(object):
 
     def select_info(self):
         """Pour recuperer les info depuis la base de donnée"""
-        print("id_p dans modif =",iden)
+        from accueil import iden
+        print("id_p dans modif =", iden)
         test = iden
         # test = "DA454"
         conx, cur = connexion()
         try:
-            cur.execute("""SELECT nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance FROM patient WHERE id_patient = "{}" """.format(test))
+            cur.execute(
+                """SELECT nom,prenom,sexe,dateNaiss,cni,profession,tel,email,assurance FROM patient WHERE id_patient = "{}" """.format(test))
             print("SQL SELECTION TABLE patient --> ok")
         except Exception as e:
-            print("ERREUR SELECTION TABLE patient : ",e)
+            print("ERREUR SELECTION TABLE patient : ", e)
         res = cur.fetchall()
         conx.close()
-        info = list()
-        for data in res:
-            info.append(data)
-        return info
+        if len(res) != 0:
+            info = list()
+            for data in res:
+                info.append(data)
+            return info
+        else:
+            msg = QMessageBox()
+            msg.setWindowTitle("Alert")
+            msg.setText("Le patient n'existe pas dans la base de donnée!!!")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
 
     def set_info(self):
         # ndate = self.QtWidgets.QDate()
         data = self.select_info()
-        print("len = ",len(data))
+        print("len = ", len(data))
         self.nomClient.setText(data[0][0])
         self.prenomClient.setText(data[0][1])
-        self.sexe.setItemText(0,data[0][2])
+        self.sexe.setItemText(0, data[0][2])
         # self.date.setText(data[0][3])
         self.cni_Client.setText(data[0][4])
         self.cni_Client.setEnabled(False)
         self.prof.setText(data[0][5])
         self.cont.setText(data[0][6])
         self.mail.setText(data[0][7])
-        self.sexe_3.setItemText(0,data[0][8])
+        self.sexe_3.setItemText(0, data[0][8])
 
     def update_info(self):
         from accueil import iden
         nom = self.nomClient.text()
         prenom = self.prenomClient.text()
         sexe = self.sexe.currentText()
-        #dateNaiss = self.date.date().toPyDate()
-        cni = self.cni_Client.text()
+        # dateNaiss = self.date.date().toPyDate()
         profession = self.prof.text()
         tel = self.cont.text()
         email = self.mail.text()
         assurance = self.sexe_3.currentText()
         id_patient = iden
         # id_patient = "DA454"
-        element = (nom,prenom,sexe,profession,tel,email,assurance,id_patient)
+        element = (nom, prenom, sexe, profession, tel, email, assurance, id_patient)
         conx, cur = connexion()
         try:
-            cur.execute("""UPDATE patient SET nom= ?, prenom= ?, sexe= ?, profession= ?, tel= ?, email= ?, assurance= ? WHERE id_patient=?""",element)
+            cur.execute(
+                """UPDATE patient SET nom= ?, prenom= ?, sexe= ?, profession= ?, tel= ?, email= ?, assurance= ? WHERE id_patient=?""", element)
             print("SQL MODIFICATION TABLE patient--> ok")
             conx.commit()
             msg = QMessageBox()
@@ -71,7 +80,7 @@ class Ui_Modif(object):
             msg.exec_()
         except Exception as e:
             print("SQL MODIFICATION TABLE patient--> fail")
-            print('Error : ',e)
+            print('Error : ', e)
             msg = QMessageBox()
             msg.setWindowTitle("Echec")
             msg.setText("Echec de connexion")
@@ -81,7 +90,7 @@ class Ui_Modif(object):
 
     def setupUi(self, Modif):
         from accueil import iden
-        print("Iden sur la fenetre : ",iden)
+        print("Iden sur la fenetre : ", iden)
         Modif.setObjectName("Modif")
         Modif.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(Modif)
@@ -94,23 +103,23 @@ class Ui_Modif(object):
         font.setWeight(75)
         self.groupBox.setFont(font)
         self.groupBox.setStyleSheet("QLineEdit{\n"
-"    color: rgb(239, 239, 239);\n"
-"    color: rgb(238, 238, 238);\n"
-"background-color: rgb(188, 188, 188);\n"
-"}")
+                                    "    color: rgb(239, 239, 239);\n"
+                                    "    color: rgb(238, 238, 238);\n"
+                                    "background-color: rgb(188, 188, 188);\n"
+                                    "}")
         self.groupBox.setObjectName("groupBox")
         self.photo = QtWidgets.QLabel(self.groupBox)
         self.photo.setGeometry(QtCore.QRect(540, 10, 101, 101))
         self.photo.setStyleSheet("\n"
-"background-color: rgb(203, 203, 203);")
+                                 "background-color: rgb(203, 203, 203);")
         self.photo.setObjectName("photo")
         self.prenomClient = QtWidgets.QLineEdit(self.groupBox)
         self.prenomClient.setGeometry(QtCore.QRect(410, 180, 141, 21))
         self.prenomClient.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+                                        "border-radius:10px;\n"
+                                        "border-style:solid;\n"
+                                        "border-width:1px;\n"
+                                        "")
         self.prenomClient.setObjectName("prenomClient")
         self.label_3 = QtWidgets.QLabel(self.groupBox)
         self.label_3.setGeometry(QtCore.QRect(10, 180, 31, 16))
@@ -124,10 +133,10 @@ class Ui_Modif(object):
         self.nomClient = QtWidgets.QLineEdit(self.groupBox)
         self.nomClient.setGeometry(QtCore.QRect(120, 180, 131, 21))
         self.nomClient.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+                                     "border-radius:10px;\n"
+                                     "border-style:solid;\n"
+                                     "border-width:1px;\n"
+                                     "")
         self.nomClient.setText("")
         self.nomClient.setObjectName("nomClient")
         self.tool = QtWidgets.QToolButton(self.groupBox)
@@ -146,10 +155,10 @@ class Ui_Modif(object):
         self.prof = QtWidgets.QLineEdit(self.groupBox)
         self.prof.setGeometry(QtCore.QRect(120, 220, 131, 21))
         self.prof.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+                                "border-radius:10px;\n"
+                                "border-style:solid;\n"
+                                "border-width:1px;\n"
+                                "")
         self.prof.setObjectName("prof")
         self.label_10 = QtWidgets.QLabel(self.groupBox)
         self.label_10.setGeometry(QtCore.QRect(10, 280, 61, 16))
@@ -158,10 +167,10 @@ class Ui_Modif(object):
         self.nation.setGeometry(QtCore.QRect(120, 280, 131, 21))
         self.nation.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.nation.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+                                  "border-radius:10px;\n"
+                                  "border-style:solid;\n"
+                                  "border-width:1px;\n"
+                                  "")
         self.nation.setObjectName("nation")
         self.label_9 = QtWidgets.QLabel(self.groupBox)
         self.label_9.setGeometry(QtCore.QRect(10, 220, 61, 16))
@@ -172,10 +181,10 @@ class Ui_Modif(object):
         self.cni_Client = QtWidgets.QLineEdit(self.groupBox)
         self.cni_Client.setGeometry(QtCore.QRect(420, 310, 131, 21))
         self.cni_Client.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+                                      "border-radius:10px;\n"
+                                      "border-style:solid;\n"
+                                      "border-width:1px;\n"
+                                      "")
         self.cni_Client.setObjectName("cni_Client")
         self.label_11 = QtWidgets.QLabel(self.groupBox)
         self.label_11.setGeometry(QtCore.QRect(310, 310, 71, 16))
@@ -183,18 +192,18 @@ class Ui_Modif(object):
         self.cont = QtWidgets.QLineEdit(self.groupBox)
         self.cont.setGeometry(QtCore.QRect(120, 320, 141, 21))
         self.cont.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+                                "border-radius:10px;\n"
+                                "border-style:solid;\n"
+                                "border-width:1px;\n"
+                                "")
         self.cont.setObjectName("cont")
         self.mail = QtWidgets.QLineEdit(self.groupBox)
         self.mail.setGeometry(QtCore.QRect(120, 360, 131, 21))
         self.mail.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+                                "border-radius:10px;\n"
+                                "border-style:solid;\n"
+                                "border-width:1px;\n"
+                                "")
         self.mail.setObjectName("mail")
         self.label_12 = QtWidgets.QLabel(self.groupBox)
         self.label_12.setGeometry(QtCore.QRect(30, 370, 41, 16))
@@ -213,10 +222,10 @@ class Ui_Modif(object):
         self.sexe = QtWidgets.QComboBox(self.groupBox)
         self.sexe.setGeometry(QtCore.QRect(420, 230, 131, 22))
         self.sexe.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+                                "border-radius:10px;\n"
+                                "border-style:solid;\n"
+                                "border-width:1px;\n"
+                                "")
         self.sexe.setObjectName("sexe")
         self.sexe.addItem("")
         self.sexe.setItemText(0, "")
@@ -225,10 +234,10 @@ class Ui_Modif(object):
         self.sexe_3 = QtWidgets.QComboBox(self.groupBox)
         self.sexe_3.setGeometry(QtCore.QRect(430, 370, 131, 22))
         self.sexe_3.setStyleSheet("border-color:black;\n"
-"border-radius:10px;\n"
-"border-style:solid;\n"
-"border-width:1px;\n"
-"")
+                                  "border-radius:10px;\n"
+                                  "border-style:solid;\n"
+                                  "border-width:1px;\n"
+                                  "")
         self.sexe_3.setObjectName("sexe_3")
         self.sexe_3.addItem("")
         self.sexe_3.setItemText(0, "")
@@ -246,21 +255,23 @@ class Ui_Modif(object):
 
         self.retranslateUi(Modif)
         QtCore.QMetaObject.connectSlotsByName(Modif)
-        #pour afficher les infos
-        # self.set_info()
-        #pour enregister les modifications
+        # pour afficher les infos
+        self.set_info()
+        # pour enregister les modifications
         self.save.clicked.connect(self.update_info)
 
     def retranslateUi(self, Modif):
         _translate = QtCore.QCoreApplication.translate
         Modif.setWindowTitle(_translate("Modif", "MainWindow"))
         self.groupBox.setTitle(_translate("Modif", "MODIFICATION DE COMPTE"))
-        self.photo.setText(_translate("Modif", "<html><head/><body><p align=\"center\">photo</p></body></html>"))
+        self.photo.setText(_translate(
+            "Modif", "<html><head/><body><p align=\"center\">photo</p></body></html>"))
         self.label_3.setText(_translate("Modif", "Nom:"))
         self.label_7.setText(_translate("Modif", "Sexe:"))
         self.label_4.setText(_translate("Modif", "Prénom:"))
         self.tool.setText(_translate("Modif", "..."))
-        self.label_13.setText(_translate("Modif", "<html><head/><body><p><span style=\" font-weight:600;\">Parcourir:</span></p></body></html>"))
+        self.label_13.setText(_translate(
+            "Modif", "<html><head/><body><p><span style=\" font-weight:600;\">Parcourir:</span></p></body></html>"))
         self.label_5.setText(_translate("Modif", "Date de naissance:"))
         self.label_10.setText(_translate("Modif", "Nationalité:"))
         self.nation.setPlaceholderText(_translate("Modif", "ivoirienne"))

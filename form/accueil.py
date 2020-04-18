@@ -12,10 +12,14 @@ from PyQt5.QtWidgets import QMessageBox
 
 
 iden = "none"
+
+
 class Ui_Accueil(object):
 
     def btn_modifier(self):
         from modif import Ui_Modif
+        global iden
+        iden = self.line_Edit_Modiffier.text()
         self.Window = QtWidgets.QMainWindow()
         self.ui = Ui_Modif()
         self.ui.setupUi(self.Window)
@@ -24,7 +28,7 @@ class Ui_Accueil(object):
     def send_iden(self):
         global iden
         iden = self.line_Edit_Modiffier.text()
-        print("id_p dans la fonction =",iden)
+        print("id_p dans la fonction =", iden)
 
     def overture_de_fenetre_inscrit(self):
         from inscrit import Ui_Inscrit
@@ -42,13 +46,13 @@ class Ui_Accueil(object):
 
     def overture_de_fenetre_saisie_id(self):
         from saisie_Id import Ui_SaisieId
-        #no touch
+        # no touch
         self.Window = QtWidgets.QMainWindow()
-        #Ui_saisieId varie selon la fenetre qu'on veut afficher
+        # Ui_saisieId varie selon la fenetre qu'on veut afficher
         self.ui = Ui_SaisieId()
         self.ui.setupUi(self.Window)
-        #juste pour faire disparaitre la fenetre courante
-        #devine(:
+        # juste pour faire disparaitre la fenetre courante
+        # devine(:
         self.Window.show()
 
     def overture_de_fenetre_saisie_id_rdv(self):
@@ -75,15 +79,15 @@ class Ui_Accueil(object):
     def delete_info(self):
         from Database import connexion
         num = self.line_Edit_Supprimer.text()
-        conx,cur = connexion()
+        conx, cur = connexion()
 
         try:
             cur.execute("""SELECT * FROM patient WHERE id_patient="{}" """.format(num))
         except Exception as e:
-            print("ERREUR SELECTION TABLE patient: ",e)
+            print("ERREUR SELECTION TABLE patient: ", e)
 
         res = cur.fetchall()
-        if(len(res)!=0):
+        if(len(res) != 0):
 
             msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Information)
@@ -104,7 +108,7 @@ class Ui_Accueil(object):
                     msg.exec_()
                     conx.close()
                 except Exception as e:
-                    print("ERREUR SUPPRESSION TABLE patient: ",e)
+                    print("ERREUR SUPPRESSION TABLE patient: ", e)
                     conx.close()
         else:
             msg = QMessageBox()
@@ -169,143 +173,6 @@ class Ui_Accueil(object):
         self.groupe_Supprimer_Fiche.setObjectName("groupe_Supprimer_Fiche")
         self.line_Edit_Supprimer = QtWidgets.QLineEdit(self.groupe_Supprimer_Fiche)
         self.line_Edit_Supprimer.setGeometry(QtCore.QRect(12, 50, 191, 20))
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(209, 13, 16))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(232, 43, 46))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Midlight, brush)
-        brush = QtGui.QBrush(QtGui.QColor(104, 6, 8))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Dark, brush)
-        brush = QtGui.QBrush(QtGui.QColor(139, 8, 10))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Mid, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.BrightText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(209, 13, 16))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(232, 134, 135))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.AlternateBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ToolTipBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ToolTipText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
-        brush.setStyle(QtCore.Qt.NoBrush)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.PlaceholderText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(209, 13, 16))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(232, 43, 46))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Midlight, brush)
-        brush = QtGui.QBrush(QtGui.QColor(104, 6, 8))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Dark, brush)
-        brush = QtGui.QBrush(QtGui.QColor(139, 8, 10))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Mid, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.BrightText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(209, 13, 16))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(232, 134, 135))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.AlternateBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ToolTipBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ToolTipText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
-        brush.setStyle(QtCore.Qt.NoBrush)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.PlaceholderText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(104, 6, 8))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(209, 13, 16))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(232, 43, 46))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Midlight, brush)
-        brush = QtGui.QBrush(QtGui.QColor(104, 6, 8))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Dark, brush)
-        brush = QtGui.QBrush(QtGui.QColor(139, 8, 10))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Mid, brush)
-        brush = QtGui.QBrush(QtGui.QColor(104, 6, 8))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.BrightText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(104, 6, 8))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(209, 13, 16))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(209, 13, 16))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(209, 13, 16))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
-        brush.setStyle(QtCore.Qt.NoBrush)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
-        self.line_Edit_Supprimer.setPalette(palette)
         self.line_Edit_Supprimer.setObjectName("line_Edit_Supprimer")
         self.boutton_Supprimer_fiche = QtWidgets.QPushButton(
             self.groupe_Supprimer_Fiche)
@@ -332,22 +199,21 @@ class Ui_Accueil(object):
         self.menuOptions.addAction(self.actionListe_des_RDV)
         self.menubar.addAction(self.menuOptions.menuAction())
 
-
         self.retranslateUi(Accueil)
         QtCore.QMetaObject.connectSlotsByName(Accueil)
         Accueil.setTabOrder(self.pushButton, self.pushButton_2)
 
-        #pour Inscription
+        # pour Inscription
         self.boutton_Inscription.clicked.connect(self.overture_de_fenetre_inscrit)
 
-        #pour Consultation
+        # pour Consultation
         self.pushButton.clicked.connect(self.overture_de_fenetre_saisie_id)
 
-        #pour Rendez vous
+        # pour Rendez vous
         self.pushButton_2.clicked.connect(self.overture_de_fenetre_saisie_id_rdv)
 
-        #pour Modiffier
-        self.boutton_Modiffierr_fiche.clicked.connect(self.send_iden)
+        # pour Modiffier
+        # self.boutton_Modiffierr_fiche.clicked.connect(self.send_iden)
         self.boutton_Modiffierr_fiche.clicked.connect(self.btn_modifier)
 
         # pour Supprimer
@@ -355,8 +221,6 @@ class Ui_Accueil(object):
 
         self.actionListe_des_Patients.triggered.connect(self.open_liste_patient)
         self.actionListe_des_RDV.triggered.connect(self.open_liste_rdv_aff)
-
-
 
     def retranslateUi(self, Accueil):
         _translate = QtCore.QCoreApplication.translate
@@ -382,7 +246,6 @@ class Ui_Accueil(object):
         self.actionListe_des_Patients.setText(_translate("Accueil", "Liste des Patients"))
         self.actionListe_des_RDV.setText(_translate("Accueil", "Liste des RDV"))
 
-print("new value ident =",iden)
 
 if __name__ == "__main__":
     import sys
